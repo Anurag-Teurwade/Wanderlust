@@ -1,0 +1,184 @@
+body {
+ font-family: "Plus Jakarta Sans", sans-seri !important; 
+ display: flex;
+ flex-direction: column;
+ min-height: 100vh;
+}
+
+.container {
+    flex: 1;
+}
+ 
+
+/* Navbar */
+.navbar{
+    height: 5rem;
+    background-color: white;
+}
+
+
+.nav-link {
+    color: #222222 !important;
+}
+
+.airbnb-icon {
+    color: #ff385c;
+    font-size: 2rem;
+}
+
+.white-icon {
+    color: white; 
+    font-size: 1rem;
+}
+
+.red-icon {
+    background-color: #ff385c;
+    font-size: 1.3rem;
+}
+
+/* Footer */
+
+.f-info-links a {
+  text-decoration: none;
+  color: #222222;
+}
+
+.f-info-links a:hover{
+    text-decoration: underline;
+}
+
+.f-info-links , .f-info-socials , .f-info-brand {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+}
+
+.f-info-socials i {
+    margin-right:1rem ;
+    font-size: 1.2rem;
+}
+
+.f-info {
+    text-align: center;
+    height: 8rem;
+    background-color: #ebebeb;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: space-evenly;
+}
+
+/* Cards */
+
+.listing-card {
+    border: none !important;
+    margin-bottom: 2rem;
+}
+
+.card-img-top {
+    border-radius:1rem !important;
+    width: 100% !important;
+    object-fit: cover !important; 
+}
+
+.card-body {
+    padding: 0 !important;
+}
+
+.card-text p {
+    font-weight: 400 !important;
+}
+
+.listing-link {
+    text-decoration: none;
+}
+
+/* Card Effect */
+
+.card-img-overlay {
+    opacity: 0;
+}
+
+.card-img-overlay:hover {
+    opacity: 0.2;
+    background-color: white;
+}
+
+/* New page */
+
+.add-btn {
+    background-color: #fe424d !important;
+    border: none !important;
+}
+
+/* Edit Page */
+
+.edit-btn {
+    background-color: #fe424d !important;
+    border: none !important;
+}
+
+/* Show Page */
+
+.show-img {
+    height: 30vh;
+}
+
+.btns {
+    display: flex;
+}
+
+.show-card {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+/*     MAP       */
+
+#map {
+    height:400px ;
+    width: 100vh;
+}  
+
+/* Custom popup styles similar to Airbnb */
+.mapboxgl-popup.custom-popup .mapboxgl-popup-content {
+    background-color: white;
+    color: black; 
+    border-radius: 8px; 
+    padding: 5px 5px; 
+    width: 250px;
+    font-family: 'Arial', sans-serif; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5); 
+    border: 1px solid rgba(0, 0, 0, 0.1); 
+}
+
+/* Make sure popup arrow matches content */
+.mapboxgl-popup.custom-popup .mapboxgl-popup-tip {
+    border-top-color: white; 
+}
+
+.mapboxgl-popup.custom-popup h4 {
+    margin: 0; 
+    font-size: 14px;
+    color: #333; 
+    font-weight:600; 
+    line-height: 1.5; 
+    
+}
+
+.mapboxgl-popup.custom-popup p {
+    margin: 0;
+    font-size: 11px; 
+    color: #555; 
+    line-height: 1.5; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    white-space: nowrap; 
+}
+
+
+
