@@ -38,36 +38,64 @@ body {
 
 /* Footer */
 
-.f-info-links a {
-  text-decoration: none;
-  color: #222222;
+/* Footer Styling */
+footer {
+    background-color: #1e1e1e;
+    color: #fff;
+    padding: 20px 0;
+    font-family: "Poppins", sans-serif;
 }
 
-.f-info-links a:hover{
+.footer-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 15px;
+}
+
+/* Social Icons */
+.footer-socials a {
+    color: #fff;
+    font-size: 1.5rem;
+    margin: 0 10px;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.footer-socials a:hover {
+    color: #00aaff;
+    transform: scale(1.1);
+}
+
+/* Brand Name */
+.footer-brand {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+/* Footer Links */
+.footer-links a {
+    color: #ccc;
+    text-decoration: none;
+    margin: 0 10px;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: #00aaff;
     text-decoration: underline;
 }
 
-.f-info-links , .f-info-socials , .f-info-brand {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center; 
+/* Responsive Design */
+@media (min-width: 600px) {
+    .footer-container {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 0 20px;
+    }
 }
 
-.f-info-socials i {
-    margin-right:1rem ;
-    font-size: 1.2rem;
-}
-
-.f-info {
-    text-align: center;
-    height: 8rem;
-    background-color: #ebebeb;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: space-evenly;
-}
 
 /* Cards */
 
