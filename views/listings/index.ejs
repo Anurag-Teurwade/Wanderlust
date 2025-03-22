@@ -50,14 +50,14 @@
    text-align: center;
 }
 
-/* Arrow buttons */
+/* Arrow buttons styling for a more Airbnb-like appearance */
 .swiper-button-next,
 .swiper-button-prev {
    width: 40px;
    height: 40px;
-   background-color: rgba(0, 0, 0, 0.7);  /* Semi-transparent circle */
-   border-radius: 50%;                     /* Circle shape */
-   color: white;
+   background-color: rgba(0, 0, 0, 0.1);  /* Light background for minimal look */
+   border-radius: 50%;                     /* Circular buttons */
+   color: rgba(0, 0, 0, 0.6);              /* Light gray for the arrows */
    display: flex;
    align-items: center;
    justify-content: center;
@@ -65,9 +65,9 @@
    top: 50%;
    transform: translateY(-50%);
    z-index: 10;
-   transition: opacity 0.3s ease, background-color 0.3s ease;
+   transition: background-color 0.3s ease, opacity 0.3s ease;
    cursor: pointer;
-   opacity: 0.7;                           /* Slight transparency */
+   opacity: 0.7;                           /* Slight transparency for subtle look */
 }
 
 /* Left and right arrow positioning */
@@ -79,12 +79,32 @@
    left: 10px;
 }
 
+/* Arrow icons */
+.swiper-button-next::after,
+.swiper-button-prev::after {
+   font-size: 18px;  /* Adjusted size for arrows */
+   color: rgba(0, 0, 0, 0.6);  /* Arrow color */
+   font-family: 'Font Awesome 5 Free'; /* Using Font Awesome icons */
+   font-weight: 900; /* Bold arrows */
+}
+
+
+/* Angular bracket arrows */
+.swiper-button-next::after {
+   content: "›";  /* Right angular bracket */
+}
+
+.swiper-button-prev::after {
+   content: "‹";  /* Left angular bracket */
+}
+
 /* Hover effect */
 .swiper-button-next:hover,
 .swiper-button-prev:hover {
-   background-color: rgba(0, 0, 0, 0.9);   /* Darker on hover */
+   background-color: rgba(0, 0, 0, 0.3);   /* Darker background on hover */
    opacity: 1;                             /* Fully visible */
 }
+
 
   </style> 
   
