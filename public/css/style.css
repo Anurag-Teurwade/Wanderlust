@@ -40,8 +40,8 @@ body {
 
 /* Footer Styling */
 footer {
-    background-color: #1e1e1e;
-    color: #fff;
+    background-color: #f7f7f7;
+    color: #222222;
     padding: 20px 0;
     font-family: "Poppins", sans-serif;
 }
@@ -56,7 +56,7 @@ footer {
 
 /* Social Icons */
 .footer-socials a {
-    color: #fff;
+    color: #333;
     font-size: 1.5rem;
     margin: 0 10px;
     transition: transform 0.3s ease, color 0.3s ease;
@@ -75,7 +75,7 @@ footer {
 
 /* Footer Links */
 .footer-links a {
-    color: #ccc;
+    color: #333;
     text-decoration: none;
     margin: 0 10px;
     font-size: 0.9rem;
