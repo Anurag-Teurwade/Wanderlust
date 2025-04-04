@@ -1,21 +1,58 @@
 <% layout("/layouts/boilerplate") %>
+
 <div class="row mt-3">
-    <h1 class="col-6 offset-3">Login</h1>
-    <div class="col-6 offset-3"> 
-        <form action="/login" method="POST" class="needs-validation" novalidate>
+  <h1 class="col-6 offset-3" style="color: rgb(237, 28, 28)" id="log">
+    Login on WanderLust
+  </h1>
+  <div class="col-6 offset-3">
+    <form
+      action="/login"
+      method="POST"
+      class="needs-validation"
+      id="custom"
+      novalidate
+    >
+      <div class="mb-3">
+        <lable for="username" class="form-label">Username</lable>
+        <input
+          name="username"
+          id="username"
+          type="text"
+          class="form-control"
+          required
+        />
+      </div>
 
-            <div class="mb-3">
-                <label for="username" class="from-label">Username</label>
-                <input name="username" id="username" type="text" class="form-control" required>
-            </div>
-
-            <div class="mb-3">
-                <label for="password" class="from-label">Password</label>
-                <input name="password" id="password" type="password" class="form-control" required>
-            </div>
-
-            <button class="btn btn-success">Login</button>
-
-        </form>
+      <div class="mb-3">
+        <lable for="password" class="form-label">Password</lable>
+        <input
+          name="password"
+          id="password"
+          type="password"
+          class="form-control"
+          required
+        />
+      </div>
+      <button class="btn btn-success">Login</button>
+    </form>
+    <div style="margin-top: 10px" id="account">
+      <p>
+        Don't have an account?&nbsp;<a href="/signup"
+          >Sign Up</a
+        >
+      </p>
     </div>
+    <div class="googleoauth">
+      <button><a href="/auth/google"><img src="/images/google-login.jpg">Login with Google</a></button>
+    </div>
+    <br>
+    <!-- <div class="googleoauth">
+      <button><a href="/auth/twitter"><img src="/images/twitter.jpg">Login with Twitter</a></button>
+    </div>
+    <br> -->
+    <div class="googleoauth">
+      <button style="background-color: black;"><a href="/auth/github" style="color: aliceblue;"><img src="/images/github.svg">Login with Github</a></button>
+    </div>
+  </div>
+  <div style="margin-bottom: 40px"></div>
 </div>

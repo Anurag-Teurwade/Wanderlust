@@ -1,35 +1,51 @@
-const express=require("express");
+const express = require("express");
 const router = express.Router();
-const wrapAsync = require("../utils/warpAsync.js");
-const { isLoggedIn, isOwner, validateListing } = require("../middlewares/middlewareManager");
+const wrapAsync = require("../utils/wrapAsync.js");
+
+const {
+  isLoggedIn,
+  isOwner,
+  validateListing,
+} = require("../middlewares/middlewareManager");
+
 const listingController = require("../controllers/listings.js");
-const multer  = require("multer");
-const {storage}  = require("../cloudConfig.js");
+const multer = require("multer");
+const { storage } = require("../cloudConfig.js");
 const upload = multer({ storage });
 
-router.route("/")
-//Index Route
-.get(wrapAsync(listingController.index))
-//Create Route
-.post(isLoggedIn,upload.single("listing[image]") ,validateListing, wrapAsync(listingController.createListing));
+router
+  .route("/")
+  .get(wrapAsync(listingController.index))
+  .post(
+    isLoggedIn,
+    upload.single("listing[image]"),
+    validateListing,
+    wrapAsync(listingController.createListing)
+  );
 
-
-
-//New Route
+// New Route
 router.get("/new", isLoggedIn, listingController.renderNewForm);
+router.get("/search", wrapAsync(listingController.search)); // ✅ Fixed: Added wrapAsync
+router.get("/filter/:id", wrapAsync(listingController.filter)); // ✅ Fixed
 
+router
+  .route("/:id")
+  .get(wrapAsync(listingController.showListing))
+  .put(
+    isLoggedIn,
+    isOwner,
+    upload.single("listing[image]"),
+    validateListing,
+    wrapAsync(listingController.updateListing)
+  )
+  .delete(isLoggedIn, isOwner, wrapAsync(listingController.destroyListing));
 
-router.route("/:id")
-//Show Route
-.get(wrapAsync(listingController.showListing))
-//Update Route
-.put(isLoggedIn,isOwner,upload.single("listing[image]"),validateListing, wrapAsync(listingController.updateListing))
-//Delete Route
-.delete(isLoggedIn,isOwner,wrapAsync(listingController.destroyListing));
-
-
-//Edit Route
-router.get("/:id/edit",isLoggedIn,isOwner, wrapAsync(listingController.renderEditForm));
-
+// Edit Route
+router.get(
+  "/:id/edit",
+  isLoggedIn,
+  isOwner,
+  wrapAsync(listingController.renderEditForm)
+);
 
 module.exports = router;

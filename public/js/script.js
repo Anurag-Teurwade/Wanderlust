@@ -4,8 +4,8 @@
   // Fetch all the forms we want to apply custom Bootstrap validation styles to
   const forms = document.querySelectorAll(".needs-validation");
 
-  // Loop over them and prevent submission if form is invalid
-  forms.forEach((form) => {
+  // Loop over them and prevent submission
+  Array.from(forms).forEach((form) => {
     form.addEventListener(
       "submit",
       (event) => {
@@ -20,3 +20,18 @@
     );
   });
 })();
+
+
+// ---- Preloader ----
+
+const loader = document.getElementById("preloader");
+
+window.addEventListener("load", function () {
+  loader.style.display = "none";
+});
+
+// slowly loader
+
+document.addEventListener("DOMContentLoaded", function() {
+  document.body.classList.add('loaded');
+});

@@ -8,48 +8,133 @@
   .search-btn:hover {
     background-color: #fe424d;
     color: #fff;
+    border-radius: 25px;
+    padding: 0 1rem 0 1rem;
   }
   .search-btn i {
     display: inline;
     margin-right: 0.5rem;
   }
   .search-inp {
-   border-radius: 25px;
-   padding: 0.5rem 3rem 0.5rem 3rem;
-   font-size: 1rem;
+    border-radius: 25px;
+    padding: 0.5rem 3rem 0.5rem 3rem;
+    font-size: 0.9rem;
   }
 
+  #responsive-registration {
+    display: none;
+  }
+
+  .dropdown button {
+    margin-left: 120px;
+    width: 80px;
+    height: 44px;
+    border-radius: 22px;
+  }
+
+  .dropdown-menu {
+    width: 200px;
+    padding: 20px;
+  }
+  .logoimg{
+    width: 50px;
+    border : none;
+    border-radius : 50%;
+    margin-left: 10px;
+  }
+
+  @media (max-width: 600px) {
+    .dropdown {
+      display: none;
+    }
+
+    #responsive-registration {
+      display: inline;
+      margin: 10px;
+    }
+    #responsive-registration a{
+      margin: 18px;
+    }
+  }
 </style>
 
+<nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/listings"
+      ><img src="/images/Wanderlust_logo.png" alt="wanderlust" class="logoimg"></i><b>WanderLust</b></a>
+    <!-- <div class="navbar-nav">
+      <a class="nav-link" id="title" href="/listings"></a>
+    </div> -->
 
-<nav class="navbar navbar-expand-sm bg-body-light border-bottom sticky-top">
-    <div class="container-fluid">
-      <a class="navbar-brand ms-5" href="/listings"><img src="logo/Wanderlust_logo.png" style="height: 60px;" ></a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNavAltMarkup"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="nav-search nav-hover nav-search-search ms-auto">
+        <form
+          class="d-flex needs-validation"
+          role="search"
+          action="/listings/search"
+          method="get"
+          id="searchBox"
+        >
+          <input
+            class="form-control me-2 search-inp"
+            type="search"
+            placeholder="Search Location   |   Title   |   Price "
+            aria-label="Search"
+            name="q"
+            id="mySearchInput"
+          />
+          <button class="btn search-btn" type="submit" id="search">
+            <i class="fa-solid fa-magnifying-glass"></i>Search
+          </button>
+        </form>
+      </div>
 
-        <div class="navbar-nav ms-5">
-          <form class="d-flex" role="search">
-            <input class="form-control me-2 search-inp" type="search" placeholder="Search Destination">
-            <button class="btn search-btn" type="submit"><i class="fa-solid fa-magnifying-glass"></i>Search</button>
-          </form>  
+      <div class="navbar-nav ms-auto">
+        <div class="dropdown">
+          <button
+            class="btn btn-success dropdown-toggle"
+            type="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <i class="fa-solid fa-circle-user"></i>
+          </button>
+          <ul class="dropdown-menu">
+            <% if(!currUser) { %>
+            <a class="nav-link" href="/signup"><i class="fa-solid fa-user-plus"></i>&nbsp;<b>Sign up</b></a>
+            <a class="nav-link" href="/login"><b><i class="fa-solid fa-user-check"></i>&nbsp;Log in</b></a>
+            <% } %> <% if(currUser) { %>
+            <a class="nav-link" href="/logout"><b><i class="fa-solid fa-arrow-right-from-bracket"></i>&nbsp;Log out</b></a>
+            <% } %>
+            <hr />
+            <a class="nav-link" href="/listings/new"
+              ><strong><i class="fa-solid fa-circle-plus"></i>&nbsp;Add New Home</strong></a
+            >
+            <a class="nav-link" href="https://mediafiles.botpress.cloud/ef5ec9b7-9474-4a69-821d-2e72da30e784/webchat/bot.html"><b><i class="fa-brands fa-rocketchat"></i>&nbsp;Chat with AI</b></a>
+          </ul>
         </div>
 
-        <div class="navbar-nav ms-auto">
-          <a class="nav-link me-5" href="/listings/new">Airbnb your home</a>
-         <% if(!currUser) {%>
-          <a class="nav-link me-5"  href="/signup"><b>Sign Up</b></a>
-          <a class="nav-link me-5" href="/login"><b>Login In</b></a>
+        <div id="responsive-registration">
+          <% if(!currUser) { %>
+          <a class="nav-link" href="/signup"><i class="fa-solid fa-user-plus"></i>&nbsp;<b>Sign up</b></a>
+          <a class="nav-link" href="/login"><i class="fa-solid fa-user-check"></i>&nbsp;<b>Log in</b></a>
+          <% } %> <% if(currUser) { %>
+          <a class="nav-link" href="/logout"><i class="fa-solid fa-arrow-right-from-bracket"></i>&nbsp;<b>Log out</b></a>
           <% } %>
-
-          <% if(currUser) { %>
-          <a class="nav-link me-5" href="/logout"><b>Logout</b></a>
-          <% } %>
-          
+          <a class="nav-link" href="/listings/new"
+            ><i class="fa-solid fa-circle-plus"></i>&nbsp;<strong>Add New Home</strong></a
+          >
+          <a class="nav-link" href="https://mediafiles.botpress.cloud/ef5ec9b7-9474-4a69-821d-2e72da30e784/webchat/bot.html"><i class="fa-brands fa-rocketchat"></i>&nbsp;<b>AI Chat Assistent</b></a>
         </div>
-
       </div>
     </div>
-  </nav>
+  </div>
+</nav>

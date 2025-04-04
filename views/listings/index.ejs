@@ -1,273 +1,422 @@
+<% layout("/layouts/boilerplate") %>
 
-  <% layout("/layouts/boilerplate") %>
-  <style>
-  #filters {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-  }
-  
-  .filter {
-    text-align: center;
-    margin-right: 2rem;
-    margin-top: 2rem;
-    opacity: 0.7;
-  }
-  
-  .filter:hover {
-    opacity: 1;
-    cursor: pointer;
-  }
-  
-  .filter p {
-    font-size: 0.8rem;
-  }
-  .tax-info {
-   display: none;
-  }
-  .tax-toggle {
-   border:  1px solid black;
-   border-radius: 1rem;
-   height: 3.2rem;
-   padding: 1rem;
-   display: flex;
-   align-items: center;
+<div class="filters-main">
+  <div id="filters">
+    <div class="filter-width">
+      <a href="/listings">
+        <div class="filter">
+          <div><i class="fa-solid fa-fire"></i></div>
+          <p>Trending</p>
+        </div>
+      </a>
+      <a href="/listings/filter/Beachfront">
+        <div class="filter">
+          <div><i class="fa-solid fa-umbrella-beach"></i></div>
+          <p>Beachfront</p>
+        </div>
+      </a>
+      <a href="/listings/filter/Farms">
+        <div class="filter">
+          <div><i class="fa-solid fa-tractor"></i></div>
+          <p>Farms</p>
+        </div>
+      </a>
+      <a href="/listings/filter/Omg">
+        <div class="filter">
+          <div><i class="fa-brands fa-space-awesome"></i></div>
+          <p>OMG</p>
+        </div>
+      </a>
+      <a href="/listings/filter/Lake">
+        <div class="filter">
+          <div><i class="fa-solid fa-water"></i></div>
+          <p>Lake</p>
+        </div>
+      </a>
+      <a href="/listings/filter/Design">
+        <div class="filter">
+          <div><i class="fa-brands fa-fort-awesome"></i></div>
+          <p>Design</p>
+        </div>
+      </a>
+      <a href="/listings/filter/Amazing Pools">
+        <div class="filter">
+          <div><i class="fa-solid fa-person-swimming"></i></div>
+          <p>Pools</p>
+        </div>
+      </a>
+      <a href="/listings/filter/Amazing Views">
+        <div class="filter">
+          <div><i class="fa-solid fa-city"></i></div>
+          <p>City</p>
+        </div>
+      </a>
+      <a href="/listings/filter/Rooms">
+        <div class="filter">
+          <div><i class="fa-solid fa-person-booth"></i></div>
+          <p>Rooms</p>
+        </div>
+      </a>
+      <a href="/listings/filter/Lakefront">
+        <div class="filter">
+          <div><i class="fa-brands fa-cloudflare"></i></div>
+          <p>Lakefront</p>
+        </div>
+      </a>
+      <a href="/listings/filter/Tiny Homes">
+        <div class="filter">
+          <div><i class="fa-solid fa-house-user"></i></div>
+          <p>Tiny</p>
+        </div>
+      </a>
+      <a href="/listings/filter/Countryside">
+        <div class="filter">
+          <div><i class="fa-solid fa-mountain-sun"></i></div>
+          <p>Countryside</p>
+        </div>
+      </a>
+      <a href="/listings/filter/Cabins">
+        <div class="filter">
+          <i class="fa-solid fa-house-chimney-window"></i>
+          <p>Cabins</p>
+        </div>
+      </a>
+      <a href="/listings/filter/Treehouse">
+        <div class="filter">
+          <div><i class="fa-solid fa-tree"></i></div>
+          <p>Treehouse</p>
+        </div>
+      </a>
+      <a href="/listings/filter/Tropical">
+        <div class="filter Tropical">
+          <div><i class="fa-solid fa-house-fire"></i></div>
+          <p>Tropical</p>
+        </div>
+      </a>
+      <a href="/listings/filter/National Parks">
+        <div class="filter National-parks">
+          <div><i class="fa-solid fa-democrat"></i></div>
+          <p>Parks</p>
+        </div>
+      </a>
+      <a href="/listings/filter/Castles">
+        <div class="filter Castles">
+          <div><i class="fa-brands fa-fort-awesome"></i></div>
+          <p>Castles</p>
+        </div>
+      </a>
+      <a href="/listings/filter/Camping">
+        <div class="filter Camping">
+          <div><i class="fa-solid fa-tents"></i></div>
+          <p>Camping</p>
+        </div>
+      </a>
+      <a href="/listings/filter/Top Of The World">
+        <div class="filter Top-of-the-world">
+          <div><i class="fa-solid fa-square-person-confined"></i></div>
+          <p>World</p>
+        </div>
+      </a>
+      <a href="/listings/filter/Luxe">
+        <div class="filter Luxe">
+          <div><i class="fa-solid fa-building-user"></i></div>
+          <p>&nbsp;Luxe&nbsp;</p>
+        </div>
+      </a>
+      <a href="/listings/filter/Iconic Cities">
+        <div class="filter Iconic-cities">
+          <div><i class="fa-solid fa-tree-city"></i></div>
+          <p>Iconic Cities</p>
+        </div>
+      </a>
+      <a href="/listings/filter/Earth Homes">
+        <div class="filter Earth-homes">
+          <div><i class="fa-solid fa-building-shield"></i></div>
+          <p>Earth Homes</p>
+        </div>
+      </a>
+    </div>
+    <div>&nbsp;&nbsp;&nbsp;</div>
+    <div class="filter-box">
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <i class="ri-equalizer-line">&nbsp;Filters</i>
+      </button>
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog modal-dialog-scrollable">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel"><b>Filters</b></h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
 
-  }
-  /* Swiper Container */
-.swiper-container {
-   width: 100%;
-   position: relative;
-   overflow: hidden;
-   padding-bottom: 20px;
-}
+              <h5>Type of place</h5>
+              <p>Search rooms, entire homes or any type of place.</p>
+              <span id="anytype-btn"><button>Any type</button><button>Room</button><button>Entire home</button></span>
+              <hr>
+              <h5>Price range</h5>
+              <p>Nightly prices before fees and taxes</p>
+              <!-- <img src="/images/rangebar.jpg" alt="" width="100%" height="100px"> -->
 
-/* Slide (icon) */
-.swiper-slide {
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-   text-align: center;
-}
+              <div class="price-range">
+                <div class="bar" id="bar1"></div>
+                <div class="bar" id="bar2"></div>
+                <div class="bar" id="bar3"></div>
+                <div class="bar" id="bar2"></div>
+                <div class="bar" id="bar3"></div>
+                <div class="bar" id="bar3"></div>
+                <div class="bar" id="bar2"></div>
+                <div class="bar" id="bar3"></div>
+                <div class="bar" id="bar3"></div>
+                <div class="bar" id="bar2"></div>
+                <div class="bar" id="bar3"></div>
+                <div class="bar" id="bar3"></div>
+                <div class="bar" id="bar2"></div>
+                <div class="bar" id="bar3"></div>
+                <div class="bar" id="bar3"></div>
+                <div class="bar" id="bar2"></div>
+                <div class="bar" id="bar3"></div>
+                <!-- Add more bars up to bar20 -->
+                <div class="bar" id="bar20"></div>
+                <div class="bar" id="bar21"></div>
+              </div>
 
-/* Arrow buttons styling for a more Airbnb-like appearance */
-.swiper-button-next,
-.swiper-button-prev {
-   width: 40px;
-   height: 40px;
-   background-color: rgba(0, 0, 0, 0.1);  /* Light background for minimal look */
-   border-radius: 50%;                     /* Circular buttons */
-   color: rgba(0, 0, 0, 0.6);              /* Light gray for the arrows */
-   display: flex;
-   align-items: center;
-   justify-content: center;
-   position: absolute;
-   top: 50%;
-   transform: translateY(-50%);
-   z-index: 10;
-   transition: background-color 0.3s ease, opacity 0.3s ease;
-   cursor: pointer;
-   opacity: 0.7;                           /* Slight transparency for subtle look */
-}
+              <div class="container overflow-hidden text-center">
+                <div class="row gx-5">
+                  <div class="col">
+                    <div class="p-3"><button id="min-btn">Minimum<p>&#8377;&nbsp;830</p></button></div>
+                  </div>
+                  <div class="col">
+                    <div class="p-3"><button id="min-btn">Maximum<p>&#8377;&nbsp;10000+</p></button></div>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <h5>Rooms and beds</h5>
+              <p>Bedrooms</p>
+              <div class="bedrooms">
+                <p class="btn btn-dark">Any</p>
+                <p>1</p>
+                <p>2</p>
+                <p>3</p>
+                <p>4</p>
+                <p>5</p>
+                <p>6+</p>
+              </div>
+              <p>Beds</p>
+              <div class="bedrooms">
+                <p class="btn btn-dark">Any</p>
+                <p>1</p>
+                <p>2</p>
+                <p>3</p>
+                <p>4</p>
+                <p>5</p>
+                <p>6+</p>
+              </div>
+              <p>Bathrooms</p>
+              <div class="bedrooms">
+                <p class="btn btn-dark">Any</p>
+                <p>1</p>
+                <p>2</p>
+                <p>3</p>
+                <p>4</p>
+                <p>5</p>
+                <p>6+</p>
+              </div>
+              <hr>
+              <h5><strong>Top-tier stays</strong></h5>
+              <div id="top-tier">
+                <i class="fa-solid fa-award"></i>
+                <p><b>Guest favourites</b></p>
+                <p id="top-tier-p">The most loved homes on Wanderlust, according to guests</p>
+              </div>
+              <hr>
+              <h5><strong>Property type</strong></h5>
+              <div class="property">
 
-/* Left and right arrow positioning */
-.swiper-button-next {
-   right: 10px;
-}
+                <div class="property-type">
+                  <i class="fa-solid fa-house"></i>
+                  <p>House</p>
+                </div>
+                <div class="property-type">
+                  <i class="fa-solid fa-building-flag"></i>
+                  <p>Flat</p>
+                </div>
+                <div class="property-type">
+                  <i class="fa-solid fa-house-chimney-window"></i>
+                  <p>Guests house</p>
+                </div>
+                <div class="property-type">
+                  <i class="fa-solid fa-building"></i>
+                  <p>Hotel</p>
+                </div>
+              </div>
+              <hr>
+              <h5><strong>Amentities</strong></h5>
+              <p><b>Essentials</b></p>
+              <div class="amentities">
 
-.swiper-button-prev {
-   left: 10px;
-}
+                <div class="amentities-item">
+                  <p><input type="checkbox">&nbsp;&nbsp;Wifi</p>
+                  <p><input type="checkbox">&nbsp;&nbsp;Washing machine</p>
+                  <p><input type="checkbox">&nbsp;&nbsp;Air conditioning</p>
+                  <p><input type="checkbox">&nbsp;&nbsp;Dedicated workspace</p>
+                  <p><input type="checkbox">&nbsp;&nbsp;Hair dryer</p>
+                </div>
+                <div class="amentities-item">
+                  <p><input type="checkbox">&nbsp;&nbsp;Kitchen</p>
+                  <p><input type="checkbox">&nbsp;&nbsp;Dryer</p>
+                  <p><input type="checkbox">&nbsp;&nbsp;Heating</p>
+                  <p><input type="checkbox">&nbsp;&nbsp;TV</p>
+                  <p><input type="checkbox">&nbsp;&nbsp;Iron</p>
+                </div>
+              </div>
 
-/* Arrow icons */
-.swiper-button-next::after,
-.swiper-button-prev::after {
-   font-size: 18px;  /* Adjusted size for arrows */
-   color: rgba(0, 0, 0, 0.6);  /* Arrow color */
-   font-family: 'Font Awesome 5 Free'; /* Using Font Awesome icons */
-   font-weight: 900; /* Bold arrows */
-}
+              <p><b>Features</b></p>
+              <div class="amentities">
 
-
-/* Angular bracket arrows */
-.swiper-button-next::after {
-   content: "›";  /* Right angular bracket */
-}
-
-.swiper-button-prev::after {
-   content: "‹";  /* Left angular bracket */
-}
-
-/* Hover effect */
-.swiper-button-next:hover,
-.swiper-button-prev:hover {
-   background-color: rgba(0, 0, 0, 0.3);   /* Darker background on hover */
-   opacity: 1;                             /* Fully visible */
-}
-
-
-  </style> 
-  
-  <body>
-    
-   <div id="filters" class="swiper-container">
-      <div class="swiper-wrapper">
-         <!-- Icon Slides -->
-         <div class="swiper-slide filter">
-            <div><i class="fa-solid fa-fire"></i></div>
-            <p>Trending</p>
-         </div>
-         <div class="swiper-slide filter">
-            <div><i class="fa-solid fa-bed"></i></div>
-            <p>Rooms</p>
-         </div>
-         <div class="swiper-slide filter">
-            <div><i class="fa-solid fa-mountain-city"></i></div>
-            <p>Iconic Cities</p>
-         </div>
-         <div class="swiper-slide filter">
-            <div><i class="fa-solid fa-mountain"></i></div>
-            <p>Mountains</p>
-         </div>
-         <div class="swiper-slide filter">
-            <div><i class="fa-brands fa-fort-awesome"></i></div>
-            <p>Castles</p>
-         </div>
-         <div class="swiper-slide filter">
-            <div><i class="fa-solid fa-person-swimming"></i></div>
-            <p>Amazing Pools</p>
-         </div>
-         <div class="swiper-slide filter">
-            <div><i class="fas fa-campground"></i></div>
-            <p>Camping</p>
-         </div>
-         <div class="swiper-slide filter">
-            <div><i class="fa-solid fa-cow"></i></div>
-            <p>Farms</p>
-         </div>
-         <div class="swiper-slide filter">
-            <div><i class="fa-regular fa-snowflake"></i></div>
-            <p>Arctic</p>
-         </div>
-         <div class="swiper-slide filter">
-            <div><i class="fa-solid fa-igloo"></i></div>
-            <p>Domes</p>
-         </div>
-         <div class="swiper-slide filter">
-            <div><i class="fa-solid fa-ship"></i></div>
-            <p>Boats</p>
-         </div>
-         <div class="swiper-slide filter">
-            <div><i class="fa-solid fa-helmet-safety"></i></div>
-            <p>Caves</p>
-         </div>
-         <div class="swiper-slide filter">
-            <div><i class="fas fa-hiking"></i></div>
-            <p>National Parks</p>
-         </div>
-      </div>
-      
-      <!-- Navigation Arrows -->
-      <div class="swiper-button-next"></div>
-      <div class="swiper-button-prev"></div>
-   
-      <!-- Tax Toggle (after the right slider arrow) -->
-      <div class="tax-toggle">
-         <div class="form-check-reverse form-switch">
-            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-            <label class="form-check-label" for="flexSwitchCheckDefault">Display total after taxes</label>
-         </div>
-      </div>
-   </div>
-   
-   
-
-  
-
-
-
-    <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3">
-      <% for(let listing of allListings){ %>
-        <a href="/listings/<%= listing._id %>" class="listing-link">
-          <div class="card col listing-card ">
-            <img src="<%= listing.image.url %>" class="card-img-top" alt="listing_image" style="height: 20rem;" >
-            <div class="card-img-overlay"></div>
-            <div class="card-body">
-              <p class="card-text">
-                <b><%= listing.title %></b><br>
-                &#8377; <%= listing.price.toLocaleString("en-IN") %> / night
-                <i class="tax-info">&nbsp; &nbsp;+18% GST</i>
-              </p>
+                <div class="amentities-item">
+                  <p><input type="checkbox">&nbsp;&nbsp;Pool</p>
+                  <p><input type="checkbox">&nbsp;&nbsp;Free Parking</p>
+                  <p><input type="checkbox">&nbsp;&nbsp;Cot</p>
+                  <p><input type="checkbox">&nbsp;&nbsp;Gym</p>
+                  <p><input type="checkbox">&nbsp;&nbsp;Breakfast</p>
+                </div>
+                <div class="amentities-item">
+                  <p><input type="checkbox">&nbsp;&nbsp;Hot tub</p>
+                  <p><input type="checkbox">&nbsp;&nbsp;EV charger</p>
+                  <p><input type="checkbox">&nbsp;&nbsp;King ded</p>
+                  <p><input type="checkbox">&nbsp;&nbsp;BBQ grill</p>
+                  <p><input type="checkbox">&nbsp;&nbsp;fireplace</p>
+                </div>
+              </div>
+              <p><b>Locations</b></p>
+              <div class="amentities">
+                <div class="amentities-item">
+                  <p><input type="checkbox">&nbsp;&nbsp;Beachfront</p>
+                </div>
+                <div class="amentities-item">
+                  <p><input type="checkbox">&nbsp;&nbsp;Waterfront</p>
+                </div>
+              </div>
+              <p><b>Safety</b></p>
+              <div class="amentities">
+                <div class="amentities-item">
+                  <p><input type="checkbox">&nbsp;&nbsp;Smoke allowed</p>
+                </div>
+                <div class="amentities-item">
+                  <p><input type="checkbox">&nbsp;&nbsp;Carbon mono-oxide</p>
+                </div>
+              </div>
+              <hr>
+              <h5><strong>Host language</strong></h5>
+              <div class="amentities">
+                <div class="amentities-item">
+                  <p><input type="checkbox">&nbsp;&nbsp;English</p>
+                  <p><input type="checkbox">&nbsp;&nbsp;German</p>
+                </div>
+                <div class="amentities-item">
+                  <p><input type="checkbox">&nbsp;&nbsp;French</p>
+                  <p><input type="checkbox">&nbsp;&nbsp;Japanese</p>
+                </div>
+              </div>
+              <hr>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-success" data-bs-dismiss="modal"><a href="/" style="text-decoration: none; color: white;">Show</a></button>
+              <!-- <button type="button" class="btn btn-success" data-bs-dismiss="modal">Dismiss</button> -->
             </div>
           </div>
-        </a>
-          <% } %>    
+        </div>
+      </div>
     </div>
+    <div class="tax-toggle">
+      <div class="form-check-reverse form-switch">
+        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" style="cursor: pointer;">
+        <label class="form-check-label" for="flexSwitchCheckDefault">Display total after taxes</label>
+      </div>
+    </div>
+  </div>
+</div>
 
-   <script>
-    var swiper = new Swiper('.swiper-container', {
-   slidesPerView: 8,               // Default number of icons for large screens
-   spaceBetween: 20,               // Space between slides
-   slidesPerGroup: 1,              // Slide one item at a time
-   loop: false,                    // Disable infinite loop
-   navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
-   },
-   breakpoints: {
-      320: {                       // Mobile view
-         slidesPerView: 2,
-         spaceBetween: 10,
-      },
-      640: {                       // Small tablets
-         slidesPerView: 3,
-         spaceBetween: 15,
-      },
-      1024: {                      // Tablets
-         slidesPerView: 5,
-         spaceBetween: 20,
-      },
-      1200: {                      // Desktop (same as Airbnb)
-         slidesPerView: 8,
-         spaceBetween: 20,
+<div class="responsive" style="margin-top: 20px;">
+  <div class="form-check-reverse form-switch">
+    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault2">
+    <label class="form-check-label" for="flexSwitchCheckDefault2">Display total after taxes</label>
+  </div>
+</div>
+
+<div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3">
+  <% for(let listing of allListings) { %>
+  <a href="/listings/<%= listing._id %>" class="listing-link">
+    <div class="card col listing-card">
+      <div id="container">
+        <img src="<%= listing.image.url %>" class="card-img-top" alt="listing_image" style="height: 20rem" />
+      </div>
+
+      <!-- heart -  &#9829; -->
+      <div class="card-img-overlay"><i class="ri-heart-fill"></i></div>
+      <div class="card-body">
+        <p class="card-text">
+
+          <strong><%= listing.title %></strong><br><span style="color: grey;"><i class="fa-solid fa-location-dot">&nbsp;</i><%= listing.country %></span>
+        <div class="price" style="margin-top: -12px;">&#8377; <%= listing.price.toLocaleString("en-IN") %> night<br></div>
+        <span class="tax-info" style="text-decoration: underline;">&#8377; <%= (listing.price*1.18).toLocaleString("en-IN") %> &nbsp; Includes 18% GST </span>
+        <i class="tax-info2" style="text-decoration: underline;">&#8377; <%= (listing.price*1.8).toLocaleString("en-IN") %> &nbsp; Includes 18% GST </i>
+
+        </p>
+      </div>
+    </div>
+  </a>
+  <% } %>
+</div>
+
+<script src="/js/script.js"></script>
+
+<script>
+  let price = document.getElementsByClassName("price");
+  let taxSwitch = document.getElementById("flexSwitchCheckDefault");
+  taxSwitch.addEventListener("click", () => {
+    let taxInfo = document.getElementsByClassName("tax-info");
+    for (info of taxInfo) {
+      if (info.style.display != "inline") {
+        info.style.display = "inline";
+        info.style.fontWeight = "bold";
+        info.style.color = "crimson";
+      } else {
+        info.style.display = "none";
       }
-   }
-});
+    }
+  });
+</script>
 
-// Initially hide the left button
-document.querySelector('.swiper-button-prev').style.display = 'none';
-
-// Update visibility of arrows based on current position in the slide
-swiper.on('slideChange', function () {
-   if (swiper.activeIndex === 0) {
-      document.querySelector('.swiper-button-prev').style.display = 'none'; // Hide left arrow at the start
-   } else {
-      document.querySelector('.swiper-button-prev').style.display = 'flex'; // Show left arrow after the first slide
-   }
-
-   if (swiper.isEnd) {
-      document.querySelector('.swiper-button-next').style.display = 'none'; // Hide right arrow at the end
-   } else {
-      document.querySelector('.swiper-button-next').style.display = 'flex'; // Show right arrow when not at the end
-   }
-});
-
-   </script>
-  
-
-  <script>
-   let taxSwitch = document.getElementById("flexSwitchCheckDefault");
-   taxSwitch.addEventListener("click",() => {
-      let taxInfo = document.getElementsByClassName("tax-info");
-      for(info of taxInfo){
-         if(info.style.display != "inline"){
-            info.style.display ="inline";
-         }else {
-            info.style.display ="none";
-         }
+<script>
+  let taxSwitch2 = document.getElementById("flexSwitchCheckDefault2");
+  taxSwitch2.addEventListener("click", () => {
+    let taxInfo2 = document.getElementsByClassName("tax-info2");
+    for (info of taxInfo2) {
+      if (info.style.display != "inline") {
+        info.style.display = "inline";
+        info.style.fontWeight = "bold";
+      } else {
+        info.style.display = "none";
       }
-   });
-  </script>
-   
-</body>
+    }
+  });
+</script>
 
+<script>
+  const bars = document.querySelectorAll(".bar");
+
+  // Set the heights for each bar representing the price range
+  const prices = [
+    10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 90, 80, 70, 60, 50, 40, 30, 20, 10,
+    5,
+  ];
+  // Adjust prices as needed
+  bars.forEach((bar, index) => {
+    bar.style.height = prices[index] + "px";
+  });
+</script>

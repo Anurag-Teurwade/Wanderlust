@@ -1,23 +1,86 @@
 <footer>
-    <div class="footer-container">
-        <div class="footer-socials">
-            <a href="https://facebook.com" target="_blank"><i class="fa-brands fa-facebook"></i></a>
-            <a href="https://instagram.com" target="_blank"><i class="fa-brands fa-instagram"></i></a>
-            <a href="https://linkedin.com" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
-        </div>
-        
-        <div class="footer-brand">
-            &copy; <span id="year"></span> WanderLust Private Limited
-        </div>
-        
-        <div class="footer-links">
-            <a href="/privacy">Privacy Policy</a>
-            <a href="/terms">Terms of Service</a>
-            <a href="/contact">Contact Us</a>
-        </div>
+  <div class="footer">
+    <div class="footer-item">
+      <h5>Support</h5>
+      <hr style="width: 70%" />
+      <a href="#">Help Centre</a>
+      <a href="#">AirCover</a>
+      <a href="#">Anti-discrimination</a>
+      <a href="#">Disability support</a>
+      <a href="#">Concern</a>
+      <a href="#">Cancellation option</a>
+      <a href="#">Report neighbourhood </a>
     </div>
+    <div class="footer-item">
+      <h5>Hosting</h5>
+      <hr style="width: 70%" />
+      <a href="#">Wanderlust your home</a>
+      <a href="#">AirCover for Hosts</a>
+      <a href="#">Hosting resources</a>
+      <a href="#">Community forum</a>
+      <a href="#">Hosting responsibly</a>
+    </div>
+    <div class="footer-item" id="third-fr">
+      <h5>WanderLust</h5>
+      <hr style="width: 70%" />
+      <a href="#">Newsroom</a>
+      <a href="#">New features</a>
+      <a href="#">Careers</a>
+      <a href="#">Investors</a>
+      <a href="#">Wanderlust.org emergency</a>
+    </div>
+  </div>
+  <div class="scrollup">
+    <!-- <button>Back to top</button> -->
+    <button onclick="scrollToTop()" class="topfun">
+      <i class="fa-solid fa-arrow-up"></i>
+    </button>
+  </div>
+  <hr style="margin: 30px" />
+  <div class="container lang-inr">
+    <div>
+      <p class="nav-link" id="title">
+        <img src="/images/logo3.jpg" class="logoimg" />&nbsp;&nbsp;<b>WanderLust</b>
+      </p>
+      <p>Holidays rentals homes, villa, cabins, beach house and more</p>
+    </div>
+    <button class="btn btn-danger">
+      <i class="fa-solid fa-globe">&nbsp;</i>English (IN)
+    </button>
+  </div>
+  <hr style="margin: 30px" id="tonone" />
+  <div class="f-info">
+    <div class="f-info-socials">
+      <i class="fa-brands fa-facebook" style="color: rgb(49, 159, 250)"></i>
+      <!-- <i class="fa-brands fa-threads" style="color: rgba(75, 74, 74, 0.937);"></i> -->
+      <img src="/images/insta-logo.png" id="instagram">
+      <!-- <i class="fa-brands fa-square-instagram" style="color: rgb(252, 44, 16);"></i> -->
+      <i class="fa-brands fa-x-twitter" style="color: rgba(10, 10, 10, 0.947)"></i>
+      <i class="fa-brands fa-pinterest" style="color: rgb(231, 16, 16)"></i>
+    </div>
+    <div class="f-info-brand">&copy; 2024 WanderLust Private Limited, inc.</div>
+    <div class="f-info-links">
+      <a
+        href="
+            /privacy"
+        >Privacy</a
+      >
+      <a href="/terms">Terms</a>
+      <a href="/sitemap">Sitemap</a>
+      <a href="/companydetails">Company details</a>
+    </div>
+  </div>
+  <!-- <hr> -->
+  <!-- Made by MD Affan Asghar -->
+  <div style="margin-bottom: 40px"></div>
 </footer>
 
 <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
+  function scrollToTop() {
+    // Scroll to the top of the page
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth", // Optional: adds smooth scrolling animation
+    });
+  }
 </script>
