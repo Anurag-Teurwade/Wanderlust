@@ -10,7 +10,11 @@
     <h3 id="lis-tit"><%= listing.title %></h3>
   </div>
   <div class="card col-6 offset-3 show-card listing-card">
-    <img src="<%= listing.image.url %>" class="card-img-top show-img" alt="listing_image" />
+    <img
+      src="<%= listing.image.url %>"
+      class="card-img-top show-img"
+      alt="listing_image"
+    />
     <div class="card-body">
       <p class="card-text mt-2">
         Hosted by <i><%= listing.owner.username %></i>
@@ -21,16 +25,30 @@
         &#8377; <%= listing.price.toLocaleString("en-IN") %> &nbsp;/ night
       </p>
       <p class="card-text">
-        <b>Category :</b> <%= listing.category.slice(",").join(", ") %>
+        <b>Category :</b>
+        <% if (listing.category) { %> <% if (Array.isArray(listing.category)) {
+        %> <%= listing.category.join(", ") %> <% } else { %> <%=
+        listing.category.split(",").join(", ") %> <% } %> <% } else { %> N/A <%
+        } %>
       </p>
-      <p class="card-text"><b>Place :&nbsp;&nbsp;</b><i class="fa-solid fa-location-dot">&nbsp;</i><%= listing.location %></p>
-      <p class="card-text"><b>Country :&nbsp;&nbsp;</b><i class="fa-solid fa-globe">&nbsp;</i><%= listing.country %></p>
+      <p class="card-text">
+        <b>Place :&nbsp;&nbsp;</b
+        ><i class="fa-solid fa-location-dot">&nbsp;</i><%= listing.location %>
+      </p>
+      <p class="card-text">
+        <b>Country :&nbsp;&nbsp;</b><i class="fa-solid fa-globe">&nbsp;</i><%=
+        listing.country %>
+      </p>
     </div>
   </div>
   <br />
   <% if(currUser && listing.owner._id.equals(currUser._id)) { %>
   <div class="btns mb-5" style="margin-left: 10px">
-    <a href="/listings/<%= listing._id %>/edit" class="btn btn-dark col-1 offset-3 edit-btn">Edit</a>
+    <a
+      href="/listings/<%= listing._id %>/edit"
+      class="btn btn-dark col-1 offset-3 edit-btn"
+      >Edit</a
+    >
 
     <form method="POST" action="/listings/<%=listing._id%>?_method=DELETE">
       <button class="btn btn-dark offset-5">Delete</button>
@@ -44,8 +62,19 @@
     <form class="pay-form">
       <input type="hidden" name="name" value="<%= listing.title %>" />
       <input type="hidden" name="amount" value="<%= listing.price %>" />
-      <input type="hidden" name="description" value="<%= listing.description %>" />
-      <button type="submit" value="Pay Now" class="btn btn-success mx-auto" id="booking-btn">Book House</button>
+      <input
+        type="hidden"
+        name="description"
+        value="<%= listing.description %>"
+      />
+      <button
+        type="submit"
+        value="Pay Now"
+        class="btn btn-success mx-auto"
+        id="booking-btn"
+      >
+        Book House
+      </button>
       <!-- <input type="submit" value="Pay Now" /> -->
     </form>
     <% } %>
@@ -58,26 +87,71 @@
     <% if(currUser) { %>
     <hr class="hrshow" />
     <h4><i class="fa-regular fa-comment"></i> Leave a Review</h4>
-    <form action="/listings/<%= listing._id %>/reviews" method="POST" novalidate class="needs-validation">
+    <form
+      action="/listings/<%= listing._id %>/reviews"
+      method="POST"
+      novalidate
+      class="needs-validation"
+    >
       <div class="mb-3 mt-3">
         <label for="rating" class="form-label"><i id="rating">Rating</i></label>
         <fieldset class="starability-slot">
-          <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1" checked aria-label="No rating." />
-          <input type="radio" id="first-rate1" name="review[rating]" value="1" />
+          <input
+            type="radio"
+            id="no-rate"
+            class="input-no-rate"
+            name="review[rating]"
+            value="1"
+            checked
+            aria-label="No rating."
+          />
+          <input
+            type="radio"
+            id="first-rate1"
+            name="review[rating]"
+            value="1"
+          />
           <label for="first-rate1" title="Terrible">1 star</label>
-          <input type="radio" id="first-rate2" name="review[rating]" value="2" />
+          <input
+            type="radio"
+            id="first-rate2"
+            name="review[rating]"
+            value="2"
+          />
           <label for="first-rate2" title="Not good">2 stars</label>
-          <input type="radio" id="first-rate3" name="review[rating]" value="3" />
+          <input
+            type="radio"
+            id="first-rate3"
+            name="review[rating]"
+            value="3"
+          />
           <label for="first-rate3" title="Average">3 stars</label>
-          <input type="radio" id="first-rate4" name="review[rating]" value="4" />
+          <input
+            type="radio"
+            id="first-rate4"
+            name="review[rating]"
+            value="4"
+          />
           <label for="first-rate4" title="Very good">4 stars</label>
-          <input type="radio" id="first-rate5" name="review[rating]" value="5" />
+          <input
+            type="radio"
+            id="first-rate5"
+            name="review[rating]"
+            value="5"
+          />
           <label for="first-rate5" title="Amazing">5 stars</label>
         </fieldset>
       </div>
       <div class="mb-3 mt-3" id="comments">
         <label for="comment" class="form-label">Comments</label>
-        <textarea name="review[comment]" id="comment" cols="25" rows="4" class="form-control" required></textarea>
+        <textarea
+          name="review[comment]"
+          id="comment"
+          cols="25"
+          rows="4"
+          class="form-control"
+          required
+        ></textarea>
         <div class="invalid-feedback">Please add some comments for review</div>
       </div>
       <button class="btn btn-success">Submit</button>
@@ -90,17 +164,30 @@
       <div class="card col-5 ms-3 mb-2" id="card-body">
         <div class="card-body">
           <h5 class="card-title mt-2">
-            <i class="fa-solid fa-circle-user fa-lg" style="color: #ff0000;">&nbsp;</i><%=
-            review.author.username %>
+            <i class="fa-solid fa-circle-user fa-lg" style="color: #ff0000"
+              >&nbsp;</i
+            ><%= review.author.username %>
           </h5>
-          <p class="starability-result card-text" data-rating="<%= review.rating %>"></p>
+          <p
+            class="starability-result card-text"
+            data-rating="<%= review.rating %>"
+          ></p>
           <p class="card-text mb-4"><%= review.comment %></p>
           <% if(currUser && currUser._id.equals(review.author._id)) { %>
           <div class="btn-review">
-            <form method="POST" action="/listings/<%= listing._id %>/reviews/<%= review._id %>/_method=PATCH">
-              <button class="btn btn-sm btn-success"><a href="/listings/<%= review._id %>/reviewedit">Edit</a></button>
+            <form
+              method="POST"
+              action="/listings/<%= listing._id %>/reviews/<%= review._id %>/_method=PATCH"
+            >
+              <button class="btn btn-sm btn-success">
+                <a href="/listings/<%= review._id %>/reviewedit">Edit</a>
+              </button>
             </form>
-            <form class="mb-3" method="POST" action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE">
+            <form
+              class="mb-3"
+              method="POST"
+              action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE"
+            >
               <button class="btn btn-sm btn-danger">Delete</button>
             </form>
           </div>
@@ -129,7 +216,13 @@
       <i class="ri-steam-fill"><span> Gaming</span></i>
     </div>
     <div class="offers">
-      <button id="offers" type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      <button
+        id="offers"
+        type="button"
+        class="btn btn-outline-dark"
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModal"
+      >
         Show all 50 amenities
       </button>
       <!-- Button trigger modal -->
@@ -144,7 +237,13 @@
       </button> -->
 
       <!-- Modal -->
-      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div
+        class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
@@ -219,7 +318,11 @@
               </ul>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">
+              <button
+                type="button"
+                class="btn btn-outline-dark"
+                data-bs-dismiss="modal"
+              >
                 Close
               </button>
               <!-- <button type="button" class="btn btn-outline-dark">
@@ -253,20 +356,40 @@
 
     <div class="services-offer">
       <!-- Button trigger modal -->
-      <button id="offers" type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+      <button
+        id="offers"
+        type="button"
+        class="btn btn-outline-dark"
+        data-bs-toggle="modal"
+        data-bs-target="#staticBackdrop"
+      >
         Message a trip designer
       </button>
-    
+
       <!-- Modal -->
-      <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div
+        class="modal fade"
+        id="staticBackdrop"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        tabindex="-1"
+        aria-labelledby="staticBackdropLabel"
+        aria-hidden="true"
+      >
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
               <h1 class="modal-title fs-5" id="staticBackdropLabel">
-                <i class="fa-regular fa-circle-user"></i> <%= listing.owner.username %>
+                <i class="fa-regular fa-circle-user"></i> <%=
+                listing.owner.username %>
                 <span>contacting...</span>
               </h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
             </div>
             <div class="modal-body">
               <div class="mb-3">
@@ -274,15 +397,38 @@
                   <form action="https://formspree.io/f/xpwaywop" method="POST">
                     <div class="form-group">
                       <label for="name">Name:</label>
-                      <input type="text" id="name" name="name" class="form-control" placeholder="Azim Premji" required>
-            
+                      <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        class="form-control"
+                        placeholder="Azim Premji"
+                        required
+                      />
+
                       <label for="email" class="mt-3">Email:</label>
-                      <input type="email" id="email" name="_replyto" class="form-control" placeholder="azimpremji@gmail.com" required>
-            
+                      <input
+                        type="email"
+                        id="email"
+                        name="_replyto"
+                        class="form-control"
+                        placeholder="azimpremji@gmail.com"
+                        required
+                      />
+
                       <label for="message" class="mt-3">Message:</label>
-                      <textarea id="message" name="message" class="form-control" rows="4" placeholder="Write your message here..." required></textarea>
-            
-                      <button type="submit" class="btn btn-success mt-4">Send</button>
+                      <textarea
+                        id="message"
+                        name="message"
+                        class="form-control"
+                        rows="4"
+                        placeholder="Write your message here..."
+                        required
+                      ></textarea>
+
+                      <button type="submit" class="btn btn-success mt-4">
+                        Send
+                      </button>
                       <!-- <button type="button" class="btn btn-secondary mt-4" data-bs-dismiss="modal">Close</button> -->
                     </div>
                   </form>
@@ -303,9 +449,14 @@
 
   <div class="col-8 offset-3 mb-3">
     <h4 class="maph3">
-      <i class="fa-solid fa-compass fa-spin fa-sm" style="color: #ff0000"></i>&nbsp;Where you’ll be
+      <i class="fa-solid fa-compass fa-spin fa-sm" style="color: #ff0000"></i
+      >&nbsp;Where you’ll be
     </h4>
-    <p class="card-text maph3" id="location-p" style="margin-top: 10px; font-weight: 100 !important">
+    <p
+      class="card-text maph3"
+      id="location-p"
+      style="margin-top: 10px; font-weight: 100 !important"
+    >
       <%= listing.location %>, <%= listing.country %>
     </p>
     <div style="height: 20px"></div>
@@ -331,20 +482,36 @@
         <p>Response rate : 100%</p>
         <p style="margin-top: -14px">Response time : within an hour</p>
       </div>
-      <span><i class="ri-verified-badge-line">Identity Verified</i>
-        <i class="ri-medal-line">Superhost</i></span>
+      <span
+        ><i class="ri-verified-badge-line">Identity Verified</i>
+        <i class="ri-medal-line">Superhost</i></span
+      >
       <!-- <button class="mx-auto btn btn-outline-dark">
         <a href="https://www.mail.google.com/"></a>Contact host
       </button> -->
 
       <div class="services-offer">
         <!-- Button trigger modal -->
-        <button id="offers" type="button" class="btn btn-outline-dark mx-auto" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        <button
+          id="offers"
+          type="button"
+          class="btn btn-outline-dark mx-auto"
+          data-bs-toggle="modal"
+          data-bs-target="#staticBackdrop"
+        >
           Contact Host
         </button>
 
         <!-- Modal -->
-        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div
+          class="modal fade"
+          id="staticBackdrop"
+          data-bs-backdrop="static"
+          data-bs-keyboard="false"
+          tabindex="-1"
+          aria-labelledby="staticBackdropLabel"
+          aria-hidden="true"
+        >
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
@@ -354,16 +521,33 @@
               </div>
               <div class="modal-body">
                 <div class="mb-3">
-                  <label for="exampleFormControlInput1" class="form-label">Email address</label>
-                  <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="johnduke19@example.com" />
+                  <label for="exampleFormControlInput1" class="form-label"
+                    >Email address</label
+                  >
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="exampleFormControlInput1"
+                    placeholder="johnduke19@example.com"
+                  />
                 </div>
                 <div class="mb-3">
-                  <label for="exampleFormControlTextarea1" class="form-label">Write your requirments below</label>
-                  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                  <label for="exampleFormControlTextarea1" class="form-label"
+                    >Write your requirments below</label
+                  >
+                  <textarea
+                    class="form-control"
+                    id="exampleFormControlTextarea1"
+                    rows="3"
+                  ></textarea>
                 </div>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-success" data-bs-dismiss="modal">
+                <button
+                  type="button"
+                  class="btn btn-success"
+                  data-bs-dismiss="modal"
+                >
                   Submit
                 </button>
               </div>
@@ -377,82 +561,112 @@
   <!-------------------- hosted end ---------------------->
 
   <!-------------------- Accordion ------------------->
-  <h2 class="text-center p-4">Frequently Asked Questions</h2>
-  <div class="accordion col-9 mx-auto" id="accordionExample">
-    <div class="accordion-item">
-      <h2 class="accordion-header">
-        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-          How do I search for available properties?
-        </button>
-      </h2>
-      <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
-        <div class="accordion-body">
-          To search for available properties, navigate to the <b>Search bar</b> on the homepage. Enter your desired location, title of a house if you already know , category , budget & any other preferences such as amenities or property type. Click on the search button to see a list of available properties that match your criteria.
+  <section class="py-5 bg-light">
+  <div class="container">
+    <h2 class="text-center fw-bold mb-5">Frequently Asked Questions</h2>
+    <div class="accordion" id="faqAccordion">
+
+      <!-- Accordion Item 1 -->
+      <div class="accordion-item border-0 shadow-sm mb-3 rounded-3">
+        <h2 class="accordion-header" id="headingOne">
+          <button class="accordion-button rounded-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+            aria-expanded="true" aria-controls="collapseOne">
+            How do I search for available properties?
+          </button>
+        </h2>
+        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+          data-bs-parent="#faqAccordion">
+          <div class="accordion-body">
+            Use the <strong>Search bar</strong> on the homepage to enter your location, title of the house, category, budget, and preferences like amenities or property type. Click "Search" to see results.
+          </div>
         </div>
       </div>
-    </div>
-    <div class="accordion-item">
-      <h2 class="accordion-header">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-          Can I request additional services or amenities?
-        </button>
-      </h2>
-      <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-        <div class="accordion-body">
-          <b>Yes</b>, you can request additional services such as housekeeping, airport transfers, grocery delivery, or special requests like extra bedding or baby cribs. Contact the property owner/manager or use our messaging platform to make your requests.
+
+      <!-- Accordion Item 2 -->
+      <div class="accordion-item border-0 shadow-sm mb-3 rounded-3">
+        <h2 class="accordion-header" id="headingTwo">
+          <button class="accordion-button collapsed rounded-3" type="button" data-bs-toggle="collapse"
+            data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+            Can I request additional services or amenities?
+          </button>
+        </h2>
+        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+          data-bs-parent="#faqAccordion">
+          <div class="accordion-body">
+            <strong>Yes</strong>, you can request services such as housekeeping, airport transfers, grocery delivery, or extras like baby cribs. Contact the property manager or message them directly.
+          </div>
         </div>
       </div>
-    </div>
-    <div class="accordion-item">
-      <h2 class="accordion-header">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-          What safety measures are in place?
-        </button>
-      </h2>
-      <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-        <div class="accordion-body">
-          Our properties adhere to <b>Safety</b> standards and may include features such as smoke detectors, fire extinguishers, first aid kits, and emergency contact information. We also recommend familiarizing yourself with the property's layout and emergency exits upon check-in.
+
+      <!-- Accordion Item 3 -->
+      <div class="accordion-item border-0 shadow-sm mb-3 rounded-3">
+        <h2 class="accordion-header" id="headingThree">
+          <button class="accordion-button collapsed rounded-3" type="button" data-bs-toggle="collapse"
+            data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+            What safety measures are in place?
+          </button>
+        </h2>
+        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+          data-bs-parent="#faqAccordion">
+          <div class="accordion-body">
+            Our properties follow strict <strong>safety standards</strong> and often include smoke detectors, fire extinguishers, first aid kits, and emergency contact details.
+          </div>
         </div>
       </div>
-    </div>
-    <div class="accordion-item">
-      <h2 class="accordion-header">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="#collapseFour">
-          What payment methods are accepted?
-        </button>
-      </h2>
-      <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-        <div class="accordion-body">
-          We accept a variety of payment methods including <strong>credit/debit cards (Visa, MasterCard, American Express), PayPal, UPIs, Wallet and bank transfers</strong>. You can choose your preferred payment method during the checkout process. You will get the receipt of your payment method in your email address. This feature is build by me through Razorpay Payment Gateway.<strong>It is not a fake process it can actually debit your money while booking.</strong>
+
+      <!-- Accordion Item 4 -->
+      <div class="accordion-item border-0 shadow-sm mb-3 rounded-3">
+        <h2 class="accordion-header" id="headingFour">
+          <button class="accordion-button collapsed rounded-3" type="button" data-bs-toggle="collapse"
+            data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+            What payment methods are accepted?
+          </button>
+        </h2>
+        <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
+          data-bs-parent="#faqAccordion">
+          <div class="accordion-body">
+            We support multiple secure payment options including <strong>credit/debit cards, PayPal, UPI, Wallets, and bank transfers</strong> via Razorpay. A receipt is sent to your email after successful payment.
+          </div>
         </div>
       </div>
-    </div>
-    <div class="accordion-item">
-      <h2 class="accordion-header">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-          Are pets allowed in the properties?
-        </button>
-      </h2>
-      <div id="collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-        <div class="accordion-body">
-          Some properties may <b>Allow</b> pets while others may have restrictions or additional fees for pets. You can filter your search to find pet-friendly properties or contact the property owner/manager for more information about their pet policy.
+
+      <!-- Accordion Item 5 -->
+      <div class="accordion-item border-0 shadow-sm mb-3 rounded-3">
+        <h2 class="accordion-header" id="headingFive">
+          <button class="accordion-button collapsed rounded-3" type="button" data-bs-toggle="collapse"
+            data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+            Are pets allowed in the properties?
+          </button>
+        </h2>
+        <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive"
+          data-bs-parent="#faqAccordion">
+          <div class="accordion-body">
+            Some properties <strong>allow pets</strong>, others may have restrictions or fees. Use the “Pet-friendly” filter or contact the host directly for clarity.
+          </div>
         </div>
       </div>
-    </div>
-    <div class="accordion-item">
-      <h2 class="accordion-header">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
-          Do I need to create an account to add a review or make a payment?
-        </button>
-      </h2>
-      <div id="collapseSix" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-        <div class="accordion-body">
-          <strong>Yes</strong>, you need to be logged in to add a review or make a payment for booking a house. Creating an account ensures that we can provide a secure and personalized experience for all our users. It also helps us verify the authenticity of reviews and manage your bookings efficiently. You can easily sign up or log in using the "Login/Sign Up" button on the top right corner of the website.
+
+      <!-- Accordion Item 6 -->
+      <div class="accordion-item border-0 shadow-sm mb-3 rounded-3">
+        <h2 class="accordion-header" id="headingSix">
+          <button class="accordion-button collapsed rounded-3" type="button" data-bs-toggle="collapse"
+            data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+            Do I need an account to leave a review or make a payment?
+          </button>
+        </h2>
+        <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix"
+          data-bs-parent="#faqAccordion">
+          <div class="accordion-body">
+            <strong>Yes</strong>, creating an account is required for reviews and secure payments. It also helps us personalize your experience and manage your bookings efficiently.
+          </div>
         </div>
       </div>
+
     </div>
-    <br>
   </div>
+</section>
+
+
   <!-------------------- Accordion end ------------------->
 </div>
 
@@ -463,8 +677,8 @@
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
 <script>
-  $(document).ready(function() {
-    $(".pay-form").submit(function(e) {
+  $(document).ready(function () {
+    $(".pay-form").submit(function (e) {
       e.preventDefault();
 
       let formData = $(this).serialize();
@@ -473,7 +687,7 @@
         url: "/createOrder",
         type: "POST",
         data: formData,
-        success: function(res) {
+        success: function (res) {
           if (res.success) {
             var options = {
               key: "" + res.key_id + "",
@@ -483,7 +697,7 @@
               description: "" + res.description + "",
               image: "<%= listing.image.url %>",
               order_id: "" + res.order_id + "",
-              handler: function(response) {
+              handler: function (response) {
                 alert("Payment Succeeded");
                 // window.open("/","_self")
               },
@@ -500,7 +714,7 @@
               },
             };
             var razorpayObject = new Razorpay(options);
-            razorpayObject.on("payment.failed", function(response) {
+            razorpayObject.on("payment.failed", function (response) {
               alert("Payment Failed");
             });
             razorpayObject.open();
