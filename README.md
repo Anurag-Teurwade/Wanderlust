@@ -1,122 +1,94 @@
 
-# Wanderlust
+# 🌍 Wanderlust | Modern Travel Platform
 
-> A modern, full-stack travel web application that offers seamless user authentication, cloud storage for images, and an engaging user experience with a clean and dynamic UI.
 
----
+**Discover. Explore. Share.**  
+A full-stack travel community platform with secure authentication, cloud media management, and responsive design.
 
-## 🌐 Live Demo
-
-Check out the live version of Wanderlust here:  
-[https://wanderlust.yourdomain.com](https://wanderlust.yourdomain.com)  
-*(Replace with your actual live deployment URL)*
+[![Live Demo](https://img.shields.io/badge/🚀_Live_Demo-Visit_Now-2ea44f?style=for-the-badge&logo=vercel)](https://delta-projectat.onrender.com)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](LICENSE)
 
 ---
 
-## 🚀 Features
+## ✨ Key Features
 
-- Multi-provider authentication (Google, Facebook, GitHub, and Local)
-- Secure session management with MongoDB-backed sessions
-- Cloud image/file uploads powered by Cloudinary
-- Server-rendered views with EJS and dynamic layouts using ejs-mate
-- Input validation for robust form handling using Joi
-- Flash messages for real-time feedback
-- Responsive and user-friendly UI
-
----
-
-## 🛠️ Technologies Used
-
-| Technology         | Purpose                       |
-|--------------------|------------------------------|
-| Node.js            | Backend runtime              |
-| Express            | Web framework                |
-| MongoDB & Mongoose | Database and ORM             |
-| Passport.js        | Authentication middleware    |
-| Multer & Cloudinary| File upload and cloud storage|
-| EJS & ejs-mate     | Templating engine            |
-| Joi                | Input validation             |
-| dotenv             | Environment configuration    |
-| connect-flash      | Flash messaging              |
-| connect-mongo      | MongoDB session store        |
+| Category       | Highlights                                                                 |
+|----------------|---------------------------------------------------------------------------|
+| **Auth**       | Google/Facebook/GitHub + Local login • Secure sessions • Password hashing |
+| **Media**      | Cloudinary uploads • Image optimization • Responsive galleries            |
+| **UX**         | EJS templating • Flash messages • Form validation • Mobile-first design  |
+| **Data**       | MongoDB Atlas • Mongoose schemas • Geospatial queries                     |
 
 ---
 
-## 💾 Installation & Setup
+## 🛠 Tech Stack
 
-1. **Clone the repository**
+**Core**  
+![Node.js](https://img.shields.io/badge/Node.js-18.x-339933?logo=nodedotjs)
+![Express](https://img.shields.io/badge/Express-4.x-000000?logo=express)
+![MongoDB](https://img.shields.io/badge/MongoDB-6.0-47A248?logo=mongodb)
+
+**Frontend**  
+![EJS](https://img.shields.io/badge/EJS-3.1-%23E34C26?logo=ejs)
+![Tailwind](https://img.shields.io/badge/Tailwind-3.3-06B6D4?logo=tailwindcss)
+
+**Services**  
+![Cloudinary](https://img.shields.io/badge/Cloudinary-2.0-3448C5?logo=cloudinary)
+![Passport](https://img.shields.io/badge/Passport-0.7-34E27A?logo=passport)
+
+---
+
+## 🚀 Quick Start
 
 ```bash
-git clone https://github.com/yourusername/wanderlust.git
+# 1. Clone & setup
+git clone https://github.com/Anurag-Teurwade/wanderlust.git
 cd wanderlust
-````
-
-2. **Install dependencies**
-
-```bash
 npm install
+
+# 2. Configure environment
+cp .env.example .env
+# Edit with your credentials
+
+# 3. Run
+npm run dev
 ```
 
-3. **Create a `.env` file**
-
-Populate the `.env` file with your configuration. Example:
-
-```
-PORT=3000
-MONGODB_URI=your_mongodb_connection_string
-SESSION_SECRET=your_secret_key
-
-GOOGLE_CLIENT_ID=your_google_client_id
-GOOGLE_CLIENT_SECRET=your_google_client_secret
-
-FACEBOOK_APP_ID=your_facebook_app_id
-FACEBOOK_APP_SECRET=your_facebook_app_secret
-
-GITHUB_CLIENT_ID=your_github_client_id
-GITHUB_CLIENT_SECRET=your_github_client_secret
-
-CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
-CLOUDINARY_API_KEY=your_cloudinary_api_key
-CLOUDINARY_API_SECRET=your_cloudinary_api_secret
-```
-
-4. **Start the development server**
-
-```bash
-npm start
-```
-
-5. **Visit the app**
-
-Open your browser at [http://localhost:3000](http://localhost:3000)
+**Access:** `http://localhost:3000`
 
 ---
 
-## 📦 Available Scripts
+## 🌟 Project Structure
 
-* `npm start` — Starts the server
-* `npm run dev` — Starts the server with nodemon (if you use nodemon for auto-restart)
-* `npm test` — Runs tests (add if you have test scripts)
+```
+wanderlust/
+├── controllers/    # Route handlers
+├── models/         # MongoDB schemas
+├── public/         # Static assets
+├── routes/         # Express routers
+├── utils/          # Helpers & middleware
+├── views/          # EJS templates
+└── app.js          # Main application
+```
 
 ---
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please open issues and submit pull requests to help improve Wanderlust.
+We welcome contributions! Please:
+
+1. Fork the project
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit changes (`git commit -m 'Add amazing feature'`)
+4. Push (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
 ---
 
-## 📄 License
+## 📬 Contact
 
-This project is licensed under the MIT License.
+**Anurag Teurwade**  
+[![GitHub](https://img.shields.io/badge/-@Anurag--Teurwade-181717?logo=github)](https://github.com/Anurag-Teurwade) 
+[![LinkedIn](https://img.shields.io/badge/-LinkedIn-0A66C2?logo=linkedin)](https://www.linkedin.com/in/anurag-teurwade-457376230)
 
 ---
-
-## 📞 Contact
-
-For any queries, feel free to reach out:
-
-* GitHub: [https://github.com/yourusername](https://github.com/Anurag-Teurwade)
-* Email: [your.email@example.com](mailto:your.anuragteurwade912@gmail.com)
-
-
