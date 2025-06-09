@@ -1,142 +1,76 @@
-const passport = require("passport");
-const GoogleStrategy = require("passport-google-oauth20").Strategy;
-// const FacebookStrategy = require("passport-facebook").Strategy;
-const GitHubStrategy = require("passport-github2").Strategy;
-// const TwitterStrategy = require("passport-twitter").Strategy;
-// const AppleStrategy = require("passport-apple").Strategy;
-const mongoose = require("mongoose");
-const User = require("../models/user");
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const GitHubStrategy = require('passport-github2').Strategy;
+const FacebookStrategy = require('passport-facebook').Strategy;
+const User = require('../models/user');
 
-
-
-// Serialize & Deserialize User
+// Serialize/Deserialize
 passport.serializeUser((user, done) => {
   done(null, user.id);
 });
 
 passport.deserializeUser(async (id, done) => {
   try {
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-      return done(null, false);
-    }
     const user = await User.findById(id);
     done(null, user);
   } catch (err) {
-    done(err, null);
+    done(err);
   }
 });
 
-// ========== GOOGLE AUTH ==========
-passport.use(
-  new GoogleStrategy(
-    {
-      clientID: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: "/auth/google/callback",
-    },
-    async (accessToken, refreshToken, profile, done) => {
-      let user = await User.findOne({ googleId: profile.id });
-      if (!user) {
-        user = await User.create({
-          username: profile.displayName,
-          googleId: profile.id,
-          email: profile.emails[0].value,
-        });
-      }
-      return done(null, user);
-    }
-  )
-);
+// Local Strategy
+passport.use(new LocalStrategy(User.authenticate())); // <-- This comes from passport-local-mongoose
 
-// // ========== FACEBOOK AUTH ==========
-// passport.use(
-//   new FacebookStrategy(
-//     {
-//       clientID: process.env.FACEBOOK_CLIENT_ID,
-//       clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
-//       callbackURL: "/auth/facebook/callback",
-//       profileFields: ["id", "displayName", "email"],
-//     },
-//     async (accessToken, refreshToken, profile, done) => {
-//       let user = await User.findOne({ facebookId: profile.id });
-//       if (!user) {
-//         user = await User.create({
-//           username: profile.displayName,
-//           facebookId: profile.id,
-//           email: profile.emails ? profile.emails[0].value : "No Email",
-//         });
-//       }
-//       return done(null, user);
-//     }
-//   )
-// );
+// Helper to handle "user not found"
+function userNotFound(done) {
+  return done(null, false, { message: "User not found. Please sign up first." });
+}
 
-// ========== GITHUB AUTH ==========
-passport.use(
-  new GitHubStrategy(
-    {
-      clientID: process.env.GITHUB_CLIENT_ID,
-      clientSecret: process.env.GITHUB_CLIENT_SECRET,
-      callbackURL: "/auth/github/callback",
-    },
-    async (accessToken, refreshToken, profile, done) => {
-      let user = await User.findOne({ githubId: profile.id });
-      if (!user) {
-        user = await User.create({
-          username: profile.username,
-          githubId: profile.id,
-        });
-      }
-      return done(null, user);
-    }
-  )
-);
+// Google OAuth Strategy
+passport.use(new GoogleStrategy({
+  clientID: process.env.GOOGLE_CLIENT_ID,
+  clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+  callbackURL: process.env.GOOGLE_CALLBACK_URL
+}, async (accessToken, refreshToken, profile, done) => {
+  try {
+    let user = await User.findOne({ googleId: profile.id });
+    if (!user) return userNotFound(done);
+    return done(null, user);
+  } catch (err) {
+    return done(err);
+  }
+}));
 
-// // ========== TWITTER AUTH ==========
-// passport.use(
-//   new TwitterStrategy(
-//     {
-//       consumerKey: process.env.TWITTER_CLIENT_ID,
-//       consumerSecret: process.env.TWITTER_CLIENT_SECRET,
-//       callbackURL: "/auth/twitter/callback",
-//       includeEmail: true,
-//     },
-//     async (token, tokenSecret, profile, done) => {
-//       let user = await User.findOne({ twitterId: profile.id });
-//       if (!user) {
-//         user = await User.create({
-//           username: profile.displayName,
-//           twitterId: profile.id,
-//           email: profile.emails ? profile.emails[0].value : "No Email",
-//         });
-//       }
-//       return done(null, user);
-//     }
-//   )
-// );
+// GitHub OAuth Strategy
+passport.use(new GitHubStrategy({
+  clientID: process.env.GITHUB_CLIENT_ID,
+  clientSecret: process.env.GITHUB_CLIENT_SECRET,
+  callbackURL: process.env.GITHUB_CALLBACK_URL
+}, async (accessToken, refreshToken, profile, done) => {
+  try {
+    let user = await User.findOne({ githubId: profile.id });
+    if (!user) return userNotFound(done);
+    return done(null, user);
+  } catch (err) {
+    return done(err);
+  }
+}));
 
-// // ========== APPLE AUTH ==========
-// passport.use(
-//   new AppleStrategy(
-//     {
-//       clientID: process.env.APPLE_CLIENT_ID,
-//       teamID: process.env.APPLE_TEAM_ID,
-//       keyID: process.env.APPLE_KEY_ID,
-//       privateKeyLocation: process.env.APPLE_PRIVATE_KEY_PATH,
-//       callbackURL: "/auth/apple/callback",
-//     },
-//     async (accessToken, refreshToken, idToken, profile, done) => {
-//       let user = await User.findOne({ appleId: profile.id });
-//       if (!user) {
-//         user = await User.create({
-//           username: profile.displayName || "Apple User",
-//           appleId: profile.id,
-//           email: profile.email || "No Email",
-//         });
-//       }
-//       return done(null, user);
-//     }
-//   )
-// );
+// Facebook OAuth Strategy
+passport.use(new FacebookStrategy({
+  clientID: process.env.FACEBOOK_CLIENT_ID,
+  clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
+  callbackURL: process.env.FACEBOOK_CALLBACK_URL,
+  profileFields: ['id', 'displayName', 'emails']
+}, async (accessToken, refreshToken, profile, done) => {
+  try {
+    let user = await User.findOne({ facebookId: profile.id });
+    if (!user) return userNotFound(done);
+    return done(null, user);
+  } catch (err) {
+    return done(err);
+  }
+}));
 
 module.exports = passport;

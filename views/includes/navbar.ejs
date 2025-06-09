@@ -1,61 +1,22 @@
-<style>
-  .search-btn {
-    background-color: #fe424d;
-    color: #fff;
-    border-radius: 25px;
-    padding: 0 1rem 0 1rem;
-  }
-  .search-btn:hover {
-    background-color: #fe424d;
-    color: #fff;
-    border-radius: 25px;
-    padding: 0 1rem 0 1rem;
-  }
-  .search-btn i {
-    display: inline;
-    margin-right: 0.5rem;
-  }
-  .search-inp {
-    border-radius: 25px;
-    padding: 0.5rem 3rem 0.5rem 3rem;
-    font-size: 0.9rem;
-  }
+<nav
+  class="navbar navbar-expand-md navbar-light bg-white sticky-top border-bottom shadow-sm"
+  style="height: 4.5rem; z-index: 100"
+>
+  <div class="container-fluid px-3 px-md-5">
+    <!-- Logo -->
+    <a
+      class="navbar-brand d-flex align-items-center gap-2"
+      href="/listings"
+      style="margin-left: 50px"
+    >
+      <img
+        src="/images/Wanderlust_logo.png"
+        alt="wanderlust"
+        style="height: 60px; border: none"
+      />
+    </a>
 
-  #responsive-registration {
-    display: none;
-  }
-
-  .dropdown button {
-    margin-left: 120px;
-    width: 80px;
-    height: 44px;
-    border-radius: 22px;
-  }
-
-  .dropdown-menu {
-    width: 200px;
-    padding: 20px;
-  }
-  @media (max-width: 600px) {
-    .dropdown {
-      display: none;
-    }
-
-    #responsive-registration {
-      display: inline;
-      margin: 10px;
-    }
-    #responsive-registration a{
-      margin: 18px;
-    }
-  }
-</style>
-
-<nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="/listings"
-      ><img src="/images/Wanderlust_logo.png" alt="wanderlust" style= "height: 50px;"></a>
-
+    <!-- Toggler for mobile -->
     <button
       class="navbar-toggler"
       type="button"
@@ -64,66 +25,107 @@
     >
       <span class="navbar-toggler-icon"></span>
     </button>
+
+    <!-- Navbar Content -->
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="nav-search nav-hover nav-search-search ms-auto">
-        <form
-          class="d-flex needs-validation"
-          role="search"
-          action="/listings/search"
-          method="get"
-          id="searchBox"
+      <!-- Search bar -->
+      <form
+        class="d-flex mx-md-auto mt-3 mt-md-0 w-100 justify-content-center"
+        role="search"
+        action="/listings/search"
+        method="get"
+        id="searchBox"
+      >
+        <input
+          class="form-control rounded-pill me-2"
+          type="search"
+          placeholder="Search Location   |   Title   |   Price"
+          aria-label="Search"
+          name="q"
+          id="mySearchInput"
+          style="max-width: 300px; padding-left: 20px; font-size: 0.9rem"
+        />
+        <button
+          class="btn rounded-pill text-white"
+          type="submit"
+          style="background-color: #fe424d"
         >
-          <input
-            class="form-control me-2 search-inp"
-            type="search"
-            placeholder="Search Location   |   Title   |   Price "
-            aria-label="Search"
-            name="q"
-            id="mySearchInput"
-          />
-          <button class="btn search-btn" type="submit" id="search">
-            <i class="fa-solid fa-magnifying-glass"></i>Search
-          </button>
-        </form>
+          <i class="fa-solid fa-magnifying-glass me-1"></i>Search
+        </button>
+      </form>
+
+      <!-- Desktop dropdown -->
+      <div class="dropdown d-none d-md-block me-5">
+        <button
+          class="btn bg-white dropdown-toggle border rounded-pill d-flex align-items-center gap-2"
+          type="button"
+          data-bs-toggle="dropdown"
+          style="transition: box-shadow 0.3s"
+          onmouseover="this.classList.add('shadow-sm')"
+          onmouseout="this.classList.remove('shadow-sm')"
+        >
+          <i class="fa-solid fa-circle-user text-secondary fs-3"></i>
+        </button>
+
+        <ul class="dropdown-menu dropdown-menu-end p-3" style="width: 200px">
+          <% if (!currUser) { %>
+          <li>
+            <a class="dropdown-item" href="/signup"
+              ><i class="fa-solid fa-user-plus"></i> <b>Sign up</b></a
+            >
+          </li>
+          <li>
+            <a class="dropdown-item" href="/login"
+              ><i class="fa-solid fa-user-check"></i> <b>Log in</b></a
+            >
+          </li>
+          <% } else { %>
+          <li>
+            <a class="dropdown-item" href="/logout"
+              ><i class="fa-solid fa-arrow-right-from-bracket"></i>
+              <b>Log out</b></a
+            >
+          </li>
+          <% } %>
+          <hr />
+          <li>
+            <a class="dropdown-item" href="/listings/new"
+              ><i class="fa-solid fa-circle-plus"></i> <b>Add New Home</b></a
+            >
+          </li>
+          <li>
+            <a
+              class="dropdown-item"
+              href="https://mediafiles.botpress.cloud/ef5ec9b7-9474-4a69-821d-2e72da30e784/webchat/bot.html"
+              ><i class="fa-brands fa-rocketchat"></i> <b>Chat with AI</b></a
+            >
+          </li>
+        </ul>
       </div>
 
-      <div class="navbar-nav ms-auto">
-        <div class="dropdown">
-          <button
-            class="btn btn-success dropdown-toggle"
-            type="button"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
-            <i class="fa-solid fa-circle-user"></i>
-          </button>
-          <ul class="dropdown-menu">
-            <% if(!currUser) { %>
-            <a class="nav-link" href="/signup"><i class="fa-solid fa-user-plus"></i>&nbsp;<b>Sign up</b></a>
-            <a class="nav-link" href="/login"><b><i class="fa-solid fa-user-check"></i>&nbsp;Log in</b></a>
-            <% } %> <% if(currUser) { %>
-            <a class="nav-link" href="/logout"><b><i class="fa-solid fa-arrow-right-from-bracket"></i>&nbsp;Log out</b></a>
-            <% } %>
-            <hr />
-            <a class="nav-link" href="/listings/new"
-              ><strong><i class="fa-solid fa-circle-plus"></i>&nbsp;Add New Home</strong></a
-            >
-            <a class="nav-link" href="https://mediafiles.botpress.cloud/ef5ec9b7-9474-4a69-821d-2e72da30e784/webchat/bot.html"><b><i class="fa-brands fa-rocketchat"></i>&nbsp;Chat with AI</b></a>
-          </ul>
-        </div>
-
-        <div id="responsive-registration">
-          <% if(!currUser) { %>
-          <a class="nav-link" href="/signup"><i class="fa-solid fa-user-plus"></i>&nbsp;<b>Sign up</b></a>
-          <a class="nav-link" href="/login"><i class="fa-solid fa-user-check"></i>&nbsp;<b>Log in</b></a>
-          <% } %> <% if(currUser) { %>
-          <a class="nav-link" href="/logout"><i class="fa-solid fa-arrow-right-from-bracket"></i>&nbsp;<b>Log out</b></a>
-          <% } %>
-          <a class="nav-link" href="/listings/new"
-            ><i class="fa-solid fa-circle-plus"></i>&nbsp;<strong>Add New Home</strong></a
-          >
-          <a class="nav-link" href="https://mediafiles.botpress.cloud/ef5ec9b7-9474-4a69-821d-2e72da30e784/webchat/bot.html"><i class="fa-brands fa-rocketchat"></i>&nbsp;<b>AI Chat Assistent</b></a>
-        </div>
+      <!-- Mobile dropdown -->
+      <div class="d-md-none text-center mt-3 w-100">
+        <% if (!currUser) { %>
+        <a class="nav-link" href="/signup"
+          ><i class="fa-solid fa-user-plus"></i> <b>Sign up</b></a
+        >
+        <a class="nav-link" href="/login"
+          ><i class="fa-solid fa-user-check"></i> <b>Log in</b></a
+        >
+        <% } else { %>
+        <a class="nav-link" href="/logout"
+          ><i class="fa-solid fa-arrow-right-from-bracket"></i>
+          <b>Log out</b></a
+        >
+        <% } %>
+        <a class="nav-link" href="/listings/new"
+          ><i class="fa-solid fa-circle-plus"></i> <b>Add New Home</b></a
+        >
+        <a
+          class="nav-link"
+          href="https://mediafiles.botpress.cloud/ef5ec9b7-9474-4a69-821d-2e72da30e784/webchat/bot.html"
+          ><i class="fa-brands fa-rocketchat"></i> <b>AI Chat Assistant</b></a
+        >
       </div>
     </div>
   </div>

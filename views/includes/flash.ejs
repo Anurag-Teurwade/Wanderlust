@@ -1,14 +1,214 @@
-<% if(success && success.length) {%>
-    <div class="alert alert-success alert-dismissible fade show col-6 offset-3" role="alert">
-        <%= success %>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div> 
-<% } %>
+<% 
+  // Helper to ensure we have an array of messages
+  function asArray(val) {
+    if (!val) return [];
+    return Array.isArray(val) ? val : [val];
+  }
+
+  const successMessages = asArray(success);
+  const errorMessages = asArray(error);
+%>
+
+<% successMessages.forEach(msg => { %>
+  <div class="alert-toast-container">
+    <div class="alert-toast success">
+      <div class="alert-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+          <polyline points="22 4 12 14.01 9 11.01"></polyline>
+        </svg>
+      </div>
+      <div class="alert-content">
+        <p><%= msg %></p>
+      </div>
+      <button class="alert-close" aria-label="Close">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      <div class="alert-progress"></div>
+    </div>
+  </div>
+<% }) %>
+
+<% errorMessages.forEach(msg => { %>
+  <div class="alert-toast-container">
+    <div class="alert-toast error" style="height: 50px; width: 300px">
+      <div class="alert-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="8" x2="12" y2="12"></line>
+          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+      </div>
+      <div class="alert-content mt-3">
+        <p><%= msg %></p>
+      </div>
+      <button class="alert-close" aria-label="Close">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      <div class="alert-progress"></div>
+    </div>
+  </div>
+<% }) %>
 
 
-<% if(error && error.length) {%>
-    <div class="alert alert-danger alert-dismissible fade show col-6 offset-3" role="alert">
-        <%= error %>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div> 
-<% } %>
+<style>
+  .alert-toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    max-width: 400px;
+    width: 100%;
+  }
+
+  .alert-toast {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 16px;
+    margin-bottom: 16px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transform: translateX(0);
+    opacity: 1;
+    transition: all 0.3s ease;
+    background: white;
+  }
+
+  .alert-toast.success {
+    border-left: 4px solid #10b981;
+  }
+
+  .alert-toast.error {
+    border-left: 4px solid #ef4444;
+  }
+
+  .alert-icon {
+    margin-right: 12px;
+    flex-shrink: 0;
+  }
+
+  .alert-toast.success .alert-icon {
+    color: #10b981;
+  }
+
+  .alert-toast.error .alert-icon {
+    color: #ef4444;
+  }
+
+  .alert-content {
+    flex-grow: 1;
+    font-size: 14px;
+    line-height: 1.4;
+    color: #374151;
+  }
+
+  .alert-close {
+    margin-left: 12px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #9ca3af;
+    transition: color 0.2s;
+  }
+
+  .alert-close:hover {
+    color: #6b7280;
+  }
+
+  .alert-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.05);
+  }
+
+  .alert-progress::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    animation: progress 4s linear forwards;
+  }
+
+  .alert-toast.success .alert-progress::after {
+    background: #10b981;
+  }
+
+  .alert-toast.error .alert-progress::after {
+    background: #ef4444;
+  }
+
+  @keyframes progress {
+    from {
+      width: 100%;
+    }
+    to {
+      width: 0;
+    }
+  }
+
+  .alert-toast.hide {
+    transform: translateX(calc(100% + 20px));
+    opacity: 0;
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const alerts = document.querySelectorAll(".alert-toast");
+
+    alerts.forEach((alert) => {
+      const closeBtn = alert.querySelector(".alert-close");
+
+      // Close button functionality
+      closeBtn.addEventListener("click", () => {
+        closeAlert(alert);
+      });
+
+      // Auto-close after 4 seconds
+      let timer = setTimeout(() => {
+        closeAlert(alert);
+      }, 4000);
+
+      // Pause timer on hover
+      alert.addEventListener("mouseenter", () => {
+        clearTimeout(timer);
+        alert.querySelector(".alert-progress").style.animationPlayState =
+          "paused";
+      });
+
+      // Resume timer when mouse leaves
+      alert.addEventListener("mouseleave", () => {
+        const progress = alert.querySelector(".alert-progress");
+        const remainingWidth =
+          progress.offsetWidth / progress.parentElement.offsetWidth;
+        const remainingTime = remainingWidth * 4000;
+
+        timer = setTimeout(() => {
+          closeAlert(alert);
+        }, remainingTime);
+
+        progress.style.animationPlayState = "running";
+      });
+    });
+
+    function closeAlert(alert) {
+      alert.classList.add("hide");
+      alert.addEventListener("transitionend", () => {
+        alert.remove();
+      });
+    }
+  });
+</script>

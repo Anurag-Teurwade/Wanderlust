@@ -6,7 +6,7 @@
     <title>
       WanderLust | Holidays rentals, cabins, villa, beach house & more
     </title>
-    <link rel="icon" href="/images/Wanderlust_logo.png" type="image/png">
+    <link rel="icon" href="/images/Wanderlust_logo.png" type="image/png" />
     <link rel="stylesheet" href="/css/style.css" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
@@ -36,18 +36,42 @@
       href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css"
       rel="stylesheet"
     />
+
+    <!-- Swiper CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"
+    />
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
+
+    <!-- Swiper JS -->
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"
+    ></script>
   </head>
-  <body>
-
-    <div id="preloader"></div>
-
-    <%- include("../includes/navbar.ejs") %>
-    <div class="container">
-    <%- include("../includes/flash.ejs") %> <%- body %>
+  <body class="preload">
+    <!-- Preloader -->
+    <div id="preloader">
+      <div class="loader-dots">
+        <div class="loader-dot"></div>
+        <div class="loader-dot"></div>
+        <div class="loader-dot"></div>
+      </div>
     </div>
 
+    <!-- Navbar -->
+    <%- include("../includes/navbar.ejs") %>
+
+    <!-- Flash Messages Outside Container -->
+    <div class="position-relative"><%- include("../includes/flash.ejs") %></div>
+
+    <!-- Page Content -->
+    <div class="container"><%- body %></div>
+
+    <!-- Footer -->
     <%- include("../includes/footer.ejs") %>
 
     <script

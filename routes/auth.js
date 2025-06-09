@@ -1,55 +1,69 @@
+
 const express = require("express");
-const passport = require("../config/passport");
+const passport = require("passport");
 const router = express.Router();
 
-// ========== GOOGLE AUTH ==========
-router.get("/auth/google", passport.authenticate("google", { scope: ["profile", "email"] }));
+// -------------------- Google OAuth --------------------
+router.get(
+  "/google",
+  passport.authenticate("google", { scope: ["profile", "email"] })
+);
 
-router.get("/auth/google/callback",
-  passport.authenticate("google", { failureRedirect: "/login" }),
+router.get(
+  "/google/callback",
+  passport.authenticate("google", {
+    failureRedirect: "/signup",
+    failureFlash: true,
+  }),
   (req, res) => {
-    res.redirect("/");
+    req.flash("success", "Welcome back, Google user!");
+    res.redirect("/listings");
   }
 );
 
-// // ========== FACEBOOK AUTH ==========
-// router.get("/auth/facebook", passport.authenticate("facebook", { scope: ["email"] }));
+// -------------------- GitHub OAuth --------------------
+router.get(
+  "/github",
+  passport.authenticate("github", { scope: ["user:email"] })
+);
 
-// router.get("/auth/facebook/callback",
-//   passport.authenticate("facebook", { failureRedirect: "/login" }),
-//   (req, res) => {
-//     res.redirect("/");
-//   }
-// );
-
-// ========== GITHUB AUTH ==========
-router.get("/auth/github", passport.authenticate("github", { scope: ["user:email"] }));
-
-router.get("/auth/github/callback",
-  passport.authenticate("github", { failureRedirect: "/login" }),
+router.get(
+  "/github/callback",
+  passport.authenticate("github", {
+    failureRedirect: "/signup",
+    failureFlash: true,
+  }),
   (req, res) => {
-    res.redirect("/");
+    req.flash("success", "Welcome back, GitHub user!");
+    res.redirect("/listings");
   }
 );
 
-// // ========== TWITTER AUTH ==========
-// router.get("/auth/twitter", passport.authenticate("twitter"));
+// -------------------- Facebook OAuth --------------------
+router.get(
+  "/facebook",
+  passport.authenticate("facebook", { scope: ["email"] })
+);
 
-// router.get("/auth/twitter/callback",
-//   passport.authenticate("twitter", { failureRedirect: "/login" }),
-//   (req, res) => {
-//     res.redirect("/");
-//   }
-// );
+router.get(
+  "/facebook/callback",
+  passport.authenticate("facebook", {
+    failureRedirect: "/signup",
+    failureFlash: true,
+  }),
+  (req, res) => {
+    req.flash("success", "Welcome back, Facebook user!");
+    res.redirect("/listings");
+  }
+);
 
-// // ========== APPLE AUTH ==========
-// router.get("/auth/apple", passport.authenticate("apple"));
-
-// router.get("/auth/apple/callback",
-//   passport.authenticate("apple", { failureRedirect: "/login" }),
-//   (req, res) => {
-//     res.redirect("/");
-//   }
-// );
+// -------------------- Logout --------------------
+router.get("/logout", (req, res, next) => {
+  req.logout(err => {
+    if (err) return next(err);
+    req.flash("success", "Logged out successfully!");
+    res.redirect("/login");
+  });
+});
 
 module.exports = router;

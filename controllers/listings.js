@@ -102,84 +102,88 @@ module.exports.filter = async (req, res, next) => {
 };
 
 
+//search logic 
+
 module.exports.search = async (req, res) => {
   let input = req.query.q.trim().replace(/\s+/g, " ");
-  if (input == "" || input == " ") {
+  
+  if (!input || input === "") {
     req.flash("error", "Please enter search query!");
-    res.redirect("/listings");
+    return res.redirect("/listings");  // 🔁 Added 'return' here
   }
 
+  // Capitalize the first letter of each word
   let data = input.split("");
   let element = "";
   let flag = false;
+
   for (let index = 0; index < data.length; index++) {
-    if (index == 0 || flag) {
-      element = element + data[index].toUpperCase();
+    if (index === 0 || flag) {
+      element += data[index].toUpperCase();
     } else {
-      element = element + data[index].toLowerCase();
+      element += data[index].toLowerCase();
     }
-    flag = data[index] == " ";
+    flag = data[index] === " ";
   }
 
+  // Search by title
   let allListings = await Listing.find({
     title: { $regex: element, $options: "i" },
   });
-  if (allListings.length != 0) {
+
+  if (allListings.length > 0) {
     res.locals.success = "Listings searched by Title!";
-    res.render("listings/index/index", { allListings });
-    return;
+    return res.render("listings/index", { allListings });
   }
 
-  if (allListings.length == 0) {
-    allListings = await Listing.find({
-      category: { $regex: element, $options: "i" },
-    }).sort({ _id: -1 });
-    if (allListings.length != 0) {
-      res.locals.success = "Listings searched by Category!";
-      res.render("listings/index/index", { allListings });
-      return;
-    }
-  }
-  if (allListings.length == 0) {
-    allListings = await Listing.find({
-      country: { $regex: element, $options: "i" },
-    }).sort({ _id: -1 });
-    if (allListings.length != 0) {
-      res.locals.success = "Listings searched by Country!";
-      res.render("listings/index/index", { allListings });
-      return;
-    }
+  // Search by category
+  allListings = await Listing.find({
+    category: { $regex: element, $options: "i" },
+  }).sort({ _id: -1 });
+
+  if (allListings.length > 0) {
+    res.locals.success = "Listings searched by Category!";
+    return res.render("listings/index", { allListings });
   }
 
-  if (allListings.length == 0) {
-    allListings = await Listing.find({
-      location: { $regex: element, $options: "i" },
-    }).sort({ _id: -1 });
-    if (allListings.length != 0) {
-      res.locals.success = "Listings searched by Location!";
-      res.render("listings/index/index", { allListings });
-      return;
-    }
+  // Search by country
+  allListings = await Listing.find({
+    country: { $regex: element, $options: "i" },
+  }).sort({ _id: -1 });
+
+  if (allListings.length > 0) {
+    res.locals.success = "Listings searched by Country!";
+    return res.render("listings/index", { allListings });
   }
 
+  // Search by location
+  allListings = await Listing.find({
+    location: { $regex: element, $options: "i" },
+  }).sort({ _id: -1 });
+
+  if (allListings.length > 0) {
+    res.locals.success = "Listings searched by Location!";
+    return res.render("listings/index", { allListings });
+  }
+
+  // Search by price if input is a number
   const intValue = parseInt(element, 10);
-  const intDec = Number.isInteger(intValue);
+  const isNumeric = !isNaN(intValue);
 
-  if (allListings.length == 0 && intDec) {
-    allListings = await Listing.find({ price: { $lte: element } }).sort({
-      price: 1,
-    });
-    if (allListings.length != 0) {
-      res.locals.success = `Listings searched by price less than Rs ${element}!`;
-      res.render("listings/index/index", { allListings });
-      return;
+  if (isNumeric) {
+    allListings = await Listing.find({ price: { $lte: intValue } }).sort({ price: 1 });
+
+    if (allListings.length > 0) {
+      res.locals.success = `Listings searched by price less than ₹${intValue}!`;
+      return res.render("listings/index", { allListings });
     }
   }
-  if (allListings.length == 0) {
-    req.flash("error", "No listings found based on your search!");
-    res.redirect("/listings");
-  }
+
+  // No results found
+  req.flash("error", "No listings found based on your search!");
+  return res.redirect("/listings");
 };
+
 
 
 module.exports.destroyListing = async (req, res) => {
