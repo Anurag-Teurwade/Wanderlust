@@ -27,6 +27,7 @@ const listingRouter = require("./routes/listing");
 const reviewRouter = require("./routes/review");
 const userRouter = require("./routes/user");
 const authRouter = require("./routes/auth");
+const aiRoutes = require('./routes/aiRoutes');
 
 const app = express();
 
@@ -40,6 +41,7 @@ app.set("views", path.join(__dirname, "views"));
 
 // Middleware
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(session(sessionOptions));
@@ -61,7 +63,8 @@ app.use((req, res, next) => {
 app.use("/listings", listingRouter);
 app.use("/listings/:id/reviews", reviewRouter);
 app.use("/", userRouter);
-app.use("/auth", authRouter); // Google/GitHub OAuth routes
+app.use("/auth", authRouter); 
+app.use('/ai', aiRoutes);
 
 // Home Route
 app.get("/", (req, res) => {

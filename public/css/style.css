@@ -20,6 +20,34 @@ body {
 }
 
 
+/* AI Side Panel Styling */
+.ai-panel {
+  position: fixed;
+  top: 4.5rem;
+  right: -400px;
+  width: 350px;
+  height: calc(100% - 4.5rem);
+  background: white;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+  transition: right 0.3s ease-in-out;
+  z-index: 1050;
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+.ai-panel.open {
+  right: 0;
+}
+
+.ai-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+
+
 /* ------------------- Preloader Styles ------------------- */
 #preloader {
   position: fixed;

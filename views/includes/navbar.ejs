@@ -1,104 +1,44 @@
-<nav
-  class="navbar navbar-expand-md navbar-light bg-white sticky-top border-bottom shadow-sm"
-  style="height: 4.5rem; z-index: 100"
->
+<nav class="navbar navbar-expand-md navbar-light bg-white sticky-top border-bottom shadow-sm" style="height: 4.5rem; z-index: 100">
   <div class="container-fluid px-3 px-md-5">
     <!-- Logo -->
-    <a
-      class="navbar-brand d-flex align-items-center gap-2"
-      href="/listings"
-      style="margin-left: 50px"
-    >
-      <img
-        src="/images/Wanderlust_logo.png"
-        alt="wanderlust"
-        style="height: 60px; border: none"
-      />
+    <a class="navbar-brand d-flex align-items-center gap-2" href="/listings" style="margin-left: 50px">
+      <img src="/images/Wanderlust_logo.png" alt="wanderlust" style="height: 60px; border: none" />
     </a>
 
     <!-- Toggler for mobile -->
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarNavAltMarkup"
-    >
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <!-- Navbar Content -->
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <!-- Search bar -->
-      <form
-        class="d-flex mx-md-auto mt-3 mt-md-0 w-100 justify-content-center"
-        role="search"
-        action="/listings/search"
-        method="get"
-        id="searchBox"
-      >
-        <input
-          class="form-control rounded-pill me-2"
-          type="search"
-          placeholder="Search Location   |   Title   |   Price"
-          aria-label="Search"
-          name="q"
-          id="mySearchInput"
-          style="max-width: 300px; padding-left: 20px; font-size: 0.9rem"
-        />
-        <button
-          class="btn rounded-pill text-white"
-          type="submit"
-          style="background-color: #fe424d"
-        >
+      <form class="d-flex mx-md-auto mt-3 mt-md-0 w-100 justify-content-center" role="search" action="/listings/search" method="get" id="searchBox">
+        <input class="form-control rounded-pill me-2" type="search" placeholder="Search Location   |   Title   |   Price" aria-label="Search" name="q" id="mySearchInput" style="max-width: 300px; padding-left: 20px; font-size: 0.9rem" />
+        <button class="btn rounded-pill text-white" type="submit" style="background-color: #fe424d">
           <i class="fa-solid fa-magnifying-glass me-1"></i>Search
         </button>
       </form>
 
       <!-- Desktop dropdown -->
       <div class="dropdown d-none d-md-block me-5">
-        <button
-          class="btn bg-white dropdown-toggle border rounded-pill d-flex align-items-center gap-2"
-          type="button"
-          data-bs-toggle="dropdown"
-          style="transition: box-shadow 0.3s"
-          onmouseover="this.classList.add('shadow-sm')"
-          onmouseout="this.classList.remove('shadow-sm')"
-        >
+        <button class="btn bg-white dropdown-toggle border rounded-pill d-flex align-items-center gap-2" type="button" data-bs-toggle="dropdown" style="transition: box-shadow 0.3s" onmouseover="this.classList.add('shadow-sm')" onmouseout="this.classList.remove('shadow-sm')">
           <i class="fa-solid fa-circle-user text-secondary fs-3"></i>
         </button>
 
         <ul class="dropdown-menu dropdown-menu-end p-3" style="width: 200px">
           <% if (!currUser) { %>
-          <li>
-            <a class="dropdown-item" href="/signup"
-              ><i class="fa-solid fa-user-plus"></i> <b>Sign up</b></a
-            >
-          </li>
-          <li>
-            <a class="dropdown-item" href="/login"
-              ><i class="fa-solid fa-user-check"></i> <b>Log in</b></a
-            >
-          </li>
+          <li><a class="dropdown-item" href="/signup"><i class="fa-solid fa-user-plus"></i> <b>Sign up</b></a></li>
+          <li><a class="dropdown-item" href="/login"><i class="fa-solid fa-user-check"></i> <b>Log in</b></a></li>
           <% } else { %>
-          <li>
-            <a class="dropdown-item" href="/logout"
-              ><i class="fa-solid fa-arrow-right-from-bracket"></i>
-              <b>Log out</b></a
-            >
-          </li>
+          <li><a class="dropdown-item" href="/logout"><i class="fa-solid fa-arrow-right-from-bracket"></i> <b>Log out</b></a></li>
           <% } %>
           <hr />
+          <li><a class="dropdown-item" href="/listings/new"><i class="fa-solid fa-circle-plus"></i> <b>Add New Home</b></a></li>
           <li>
-            <a class="dropdown-item" href="/listings/new"
-              ><i class="fa-solid fa-circle-plus"></i> <b>Add New Home</b></a
-            >
-          </li>
-          <li>
-            <a
-              class="dropdown-item"
-              href="https://mediafiles.botpress.cloud/ef5ec9b7-9474-4a69-821d-2e72da30e784/webchat/bot.html"
-              ><i class="fa-brands fa-rocketchat"></i> <b>Chat with AI</b></a
-            >
+            <button class="dropdown-item" id="openAiPanelBtn" type="button">
+              <i class="fa-brands fa-rocketchat"></i> <b>Chat with AI</b>
+            </button>
           </li>
         </ul>
       </div>
@@ -106,27 +46,72 @@
       <!-- Mobile dropdown -->
       <div class="d-md-none text-center mt-3 w-100">
         <% if (!currUser) { %>
-        <a class="nav-link" href="/signup"
-          ><i class="fa-solid fa-user-plus"></i> <b>Sign up</b></a
-        >
-        <a class="nav-link" href="/login"
-          ><i class="fa-solid fa-user-check"></i> <b>Log in</b></a
-        >
+        <a class="nav-link" href="/signup"><i class="fa-solid fa-user-plus"></i> <b>Sign up</b></a>
+        <a class="nav-link" href="/login"><i class="fa-solid fa-user-check"></i> <b>Log in</b></a>
         <% } else { %>
-        <a class="nav-link" href="/logout"
-          ><i class="fa-solid fa-arrow-right-from-bracket"></i>
-          <b>Log out</b></a
-        >
+        <a class="nav-link" href="/logout"><i class="fa-solid fa-arrow-right-from-bracket"></i> <b>Log out</b></a>
         <% } %>
-        <a class="nav-link" href="/listings/new"
-          ><i class="fa-solid fa-circle-plus"></i> <b>Add New Home</b></a
-        >
-        <a
-          class="nav-link"
-          href="https://mediafiles.botpress.cloud/ef5ec9b7-9474-4a69-821d-2e72da30e784/webchat/bot.html"
-          ><i class="fa-brands fa-rocketchat"></i> <b>AI Chat Assistant</b></a
-        >
+        <a class="nav-link" href="/listings/new"><i class="fa-solid fa-circle-plus"></i> <b>Add New Home</b></a>
+        <button class="nav-link btn" id="openAiPanelBtn"><i class="fa-brands fa-rocketchat"></i> <b>Chat with AI</b></button>
       </div>
     </div>
   </div>
 </nav>
+
+
+<!-- AI Side Panel (Bootstrap Offcanvas) -->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="aiPanel" aria-labelledby="aiPanelLabel" style="width: 320px">
+  <div class="offcanvas-header border-bottom">
+    <h5 id="aiPanelLabel"><i class="fa-solid fa-robot me-2 text-danger"></i>AI Assistant</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body d-flex flex-column">
+    <div class="mb-3">
+      <textarea id="userPrompt" class="form-control" rows="3" placeholder="Ask about properties, locations, or pricing..."></textarea>
+    </div>
+    <button class="btn btn-danger w-100 mb-3" id="sendAiQuery">
+      <i class="fa-solid fa-paper-plane me-1"></i>Send
+    </button>
+    <div id="aiResponse" class="border rounded bg-light p-3 flex-grow-1 overflow-auto" style="font-size: 0.9rem; min-height: 120px;">
+      <p class="text-muted mb-0">AI responses will appear here...</p>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const aiPanel = new bootstrap.Offcanvas(document.getElementById("aiPanel"));
+    const btnOpen = document.querySelectorAll("#openAiPanelBtn");
+    const btnSend = document.getElementById("sendAiQuery");
+    const textarea = document.getElementById("userPrompt");
+    const output = document.getElementById("aiResponse");
+
+    // Open AI Panel from any "Chat with AI" button
+    btnOpen.forEach(btn => btn.addEventListener("click", () => aiPanel.show()));
+
+    // Send AI Query
+    btnSend?.addEventListener("click", async () => {
+      const query = textarea.value.trim();
+      if (!query) {
+        output.innerHTML = `<div class="alert alert-warning">Please type a question.</div>`;
+        return;
+      }
+
+      output.innerHTML = `<div class="d-flex justify-content-center"><div class="spinner-border text-danger"></div></div>`;
+
+      try {
+        const res = await fetch("/ai", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ query })
+        });
+        const data = await res.json();
+        output.innerHTML = `<div><strong>AI:</strong> ${data.response}</div>`;
+      } catch (err) {
+        output.innerHTML = `<div class="alert alert-danger">Something went wrong. Please try again.</div>`;
+        console.error("❌ AI fetch error:", err);
+      }
+    });
+  });
+</script>
